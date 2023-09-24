@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acervo</title>
+</head>
+
+<body>
+    {% if not livros %}
+        <p id="error">nenhum livro encontrado</p>
+    {% else %}
+        <table>
+            {% for livro in livros %}
+                <tr>
+                    <td>{{ livro.id }}</td>
+                    <td>{{ livro.titulo }}</td>
+                    <td>{{ livro.autor }}</td>
+                    <td>{{ "❌🫤❌" if livro.disponivel else "✅" }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+
+</html>
