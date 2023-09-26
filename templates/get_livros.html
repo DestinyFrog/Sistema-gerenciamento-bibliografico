@@ -15,16 +15,15 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Título</th>
+                <th>Autor</th>
                 <th>Disponível</th>
             </tr>
         </thead>
 
         {% for livro in livros %}
             <tr>
-                <td><a href="/livros/id/{{livro.id}}">{{ livro.id }}</a></td>
-                <td>{{ livro.titulo }}</td>
+                <td><a href="/livros/id/{{livro.id}}">{{ livro.titulo }}</a></td>
                 <td>{{ livro.autor }}</td>
                 <td>{{ "✅" if livro.disponivel else "❌" }}</td>
             </tr>
