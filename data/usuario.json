@@ -1,0 +1,12 @@
+[
+    {
+        "usuario": "Calisto",
+        "senha": "123456",
+        "admin": true
+    },
+    {
+        "usuario": "Pedro",
+        "senha": "654321",
+        "admin": false
+    }
+]

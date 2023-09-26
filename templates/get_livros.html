@@ -4,24 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acervo</title>
-    <link rel="stylesheet" href="./style.css">
+
+    <link rel="stylesheet" href="/global.css">
+    <link rel="stylesheet" href="/get_livros/style.css">
 </head>
 
 <body>
-    {% if not livros %}
-        <p id="error">nenhum livro encontrado</p>
-    {% else %}
-        <table>
-            {% for livro in livros %}
-                <tr>
-                    <td>{{ livro.id }}</td>
-                    <td>{{ livro.titulo }}</td>
-                    <td>{{ livro.autor }}</td>
-                    <td>{{ "✅" if livro.disponivel else "❌🫤❌" }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% endif %}
+    <a href="/add_livro/index.html">Adicionar Livro</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Disponível</th>
+            </tr>
+        </thead>
+
+        {% for livro in livros %}
+            <tr>
+                <td><a href="/livros/id/{{livro.id}}">{{ livro.id }}</a></td>
+                <td>{{ livro.titulo }}</td>
+                <td>{{ livro.autor }}</td>
+                <td>{{ "✅" if livro.disponivel else "❌" }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </body>
 
 </html>
