@@ -3,7 +3,7 @@ import json
 
 def erro_html( mensagem ):
     return make_response( f"<p style=\"color:red;\">{mensagem}</p>\
-                            <a href=\"/login/index.html\">Voltar</a>" )
+                            <a href=\"/index.html\">Voltar</a>" )
 
 def escrever_arquivo( caminho, data ):
     data_arquivo = open( caminho, "w" )

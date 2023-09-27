@@ -5,8 +5,20 @@ import json
 app = Flask(__name__)
 
 @app.route('/<path:path>')
-def pagina_estatica( path ):
-    return send_from_directory('static', path)
+def paginas_publicas( path ):
+    return send_from_directory('publico', path)
+
+@app.route('/privado/<path:path>')
+def paginas_privadas( path ):
+    cookie_usuario = request.cookies.get("nome_usuario")
+    usuarios = abrir_arquivo( "data/usuario.json" )
+
+    for usu in usuarios:
+        if usu.get("usuario") == cookie_usuario:
+            if usu.get("admin") == True:
+                return send_from_directory('privado', path)
+            return erro_html( "Usuario não tem permissao para acessar essa pagina" )
+    return erro_html( "Usuario não encontrado" )
 
 @app.route( '/login', methods=["POST"] )
 def login():
@@ -22,6 +34,31 @@ def login():
             response = make_response( redirect("/livros", code=302) )
             response.set_cookie( "nome_usuario", u.get("usuario") )
             return response
+    return erro_html( "Usuario não encontrado" )
+
+@app.route( '/cadastre', methods=["POST"] )
+def cadastro():
+    cookie_usuario = request.cookies.get("nome_usuario")
+    usuarios = abrir_arquivo( "data/usuario.json" )
+
+    for usu in usuarios:
+        if usu.get("usuario") == cookie_usuario:
+        
+            if usu.get("admin") == False:
+                return erro_html( "Você não tem permissão para criar usuários" )
+            else:
+                novo_usuario = {
+                    "usuario": request.form.get("usuario"),
+                    "senha": request.form.get("senha"),
+                    "admin": request.form.get("admin") == "on"
+                }
+
+                usuarios.append( novo_usuario )
+                escrever_arquivo( "data/usuario.json", json.dumps( usuarios ) )
+
+                response = make_response( f"Usuário cadastrado com sucesso" )
+                return response
+
     return erro_html( "Usuario não encontrado" )
 
 @app.route( '/sair', methods=["POST"] )
@@ -64,7 +101,6 @@ def get_livros_por_id( id ):
 
 @app.route( "/add-livro", methods=["POST"] )
 def post_livro():
-    # ''' Verifica autenticacao
     cookie_usuario = request.cookies.get("nome_usuario")
     data = abrir_arquivo( "data/usuario.json" )
 
@@ -72,10 +108,8 @@ def post_livro():
         if usu.get("usuario") == cookie_usuario :
 
             if usu.get("admin") == False:
-                return make_response( f"<p style=\"color:red;\">Vocẽ não tem permissao para cadastrar livros</p>\
-                                        <a href=\"/login/index.html\">Voltar</a>" )
+                return erro_html( "Você não tem permissão para cadastrar livros" )
 
-            # ''' Adicionar Livros no arquivo 'data/livros.json'
             novo_livro = { "id": maior_id() + 1, "disponivel": True }
             novo_livro.titulo = request.form.get("titulo")
             novo_livro.autor = request.form.get("autor")
@@ -84,12 +118,7 @@ def post_livro():
             data.append( novo_livro )
             escrever_arquivo( "data/livros.json", json.dumps( data ) )
 
-            resposta = make_response( redirect("/livros", code=302) )
-            return resposta
-            # '''
-
-    return make_response( redirect( "/livros", code=401 ) )
-    # '''
+    return make_response( redirect("/livros", code=302) )
 
 if __name__ == '__main__':
     app.run( '127.0.0.1', 3030, debug=True )
