@@ -4,6 +4,7 @@ import json
 
 app = Flask(__name__)
 
+# Paginas estaticas sem autenticacao
 @app.route('/<path:path>')
 def paginas_publicas( path ):
     return send_from_directory('publico', path)
@@ -75,7 +76,7 @@ def get_livros():
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
             data = abrir_arquivo( "data/livros.json" )
-            return render_template( "get_livros.html", livros=data )
+            return render_template( "get_livros.html", livros=data, adm=usu.get("admin") )
 
     return erro_html( "Usuario não encontrado" )
 
@@ -100,7 +101,7 @@ def get_livros_por_id( id ):
     return resposta
 
 @app.route( "/add-livro", methods=["POST"] )
-def post_livro():
+def add_livro():
     cookie_usuario = request.cookies.get("nome_usuario")
     data = abrir_arquivo( "data/usuario.json" )
 
@@ -110,15 +111,18 @@ def post_livro():
             if usu.get("admin") == False:
                 return erro_html( "Você não tem permissão para cadastrar livros" )
 
-            novo_livro = { "id": maior_id() + 1, "disponivel": True }
-            novo_livro.titulo = request.form.get("titulo")
-            novo_livro.autor = request.form.get("autor")
+            novo_livro = {
+                "id": maior_id() + 1,
+                "disponivel": True,
+                "titulo": request.form.get("titulo"),
+                "autor": request.form.get("autor")
+            }
 
             data = abrir_arquivo( "data/livros.json" )
             data.append( novo_livro )
-            escrever_arquivo( "data/livros.json", json.dumps( data ) )
+            escrever_arquivo( "data/livros.json", data )
 
-    return make_response( redirect("/livros", code=302) )
+    return redirect("/livros", code=302)
 
 if __name__ == '__main__':
     app.run( '127.0.0.1', 3030, debug=True )
