@@ -3,10 +3,28 @@ from util import erro_html, escrever_arquivo, abrir_arquivo
 
 app = Flask(__name__)
 
+#! Paginas estaticas sem autenticacao
+'''
+    Envia a pagina que esta no
+    caminho especificado na rota
+'''
 @app.route('/<path:path>')
 def paginas_publicas( path ):
     return send_from_directory('publico', path)
 
+#! Paginas estaticas com autenticacao
+'''
+    procura no caminho especificado,
+    porem antes verifica se nos cookies:
+        - O usuario existe;
+        - O usuario é um administrador;
+    e por fim se ambos forem verdadeiros
+    envia a pagina
+    caso contrario retorna um erro
+    que podem ser:
+        - Usuario não tem permissao para acessar essa pagina
+        - Usuario nao foi encontrado
+'''
 @app.route('/privado/<path:path>')
 def paginas_privadas( path ):
     cookie_usuario = request.cookies.get("nome_usuario")
@@ -19,24 +37,41 @@ def paginas_privadas( path ):
             return erro_html( "Usuario não tem permissao para acessar essa pagina" )
     return erro_html( "Usuario não foi encontrado" )
 
+#! Realiza login
+'''
+    Abre um arquivo json com todos os usuarios
+    visualiza entre todos eles qual tem o mesmo nome
+    de usuario enviado pela pagina
+
+    caso nao encontre retorna o erro:
+    #! Usuario nao Encontrado
+
+    depois verifica se a senha enviada pela pagina
+    condiz com a do usuario selecionado
+
+    caso sejam diferentes, retorna o erro:
+    #! Senha Incorreta
+
+    Se for logado corretamente, a pagina sera
+    redirecionada para a rota '/livros'
+'''
 @app.route( '/login', methods=["POST"] )
 def login():
-    usuario = request.form.get("usuario")
-    senha = request.form.get("senha")
-    data = abrir_arquivo( "data/usuario.json" )
+    for usu in abrir_arquivo( "data/usuario.json" ):
+        if usu.get("usuario") == request.form.get("usuario"):
 
-    for usu in data:
-        if usu.get("usuario") == usuario:
-
-            if usu.get("senha") != senha:
+            if usu.get("senha") != request.form.get("senha"):
                 return erro_html( "Senha Incorreta" )
 
             resposta = redirect("/livros", code=301)
             resposta.set_cookie( "nome_usuario", usu.get("usuario") )
             return resposta
-
     return erro_html( "Usuario não encontrado" )
 
+#! Realiza cadastro de novos usuarios
+'''
+
+'''
 @app.route( '/cadastre', methods=["POST"] )
 def cadastro():
     cookie_usuario = request.cookies.get("nome_usuario")
@@ -57,7 +92,7 @@ def cadastro():
                 usuarios.append( novo_usuario )
                 escrever_arquivo( "data/usuario.json", usuarios )
 
-                resposta = make_response( f"Usuário cadastrado com sucesso" )
+                resposta = make_response( "Usuário cadastrado com sucesso" )
                 return resposta
 
     return erro_html( "Usuario não encontrado" )
@@ -128,5 +163,4 @@ def add_livro():
 
     return redirect( "/livros", code=301 )
 
-if __name__ == '__main__':
-    app.run( '127.0.0.1', 3030, debug=True )
+app.run( '127.0.0.1', 3030, debug=True )
