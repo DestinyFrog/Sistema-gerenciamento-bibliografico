@@ -1,10 +1,8 @@
 from flask import Flask, request, send_from_directory, redirect, make_response, render_template
-from util import erro_html, escrever_arquivo, abrir_arquivo, maior_id
-import json
+from util import erro_html, escrever_arquivo, abrir_arquivo
 
 app = Flask(__name__)
 
-# Paginas estaticas sem autenticacao
 @app.route('/<path:path>')
 def paginas_publicas( path ):
     return send_from_directory('publico', path)
@@ -19,7 +17,7 @@ def paginas_privadas( path ):
             if usu.get("admin") == True:
                 return send_from_directory('privado', path)
             return erro_html( "Usuario não tem permissao para acessar essa pagina" )
-    return erro_html( "Usuario não encontrado" )
+    return erro_html( "Usuario não foi encontrado" )
 
 @app.route( '/login', methods=["POST"] )
 def login():
@@ -27,14 +25,16 @@ def login():
     senha = request.form.get("senha")
     data = abrir_arquivo( "data/usuario.json" )
 
-    for u in data:
-        if u.get("usuario") == usuario:
-            if u.get("senha") != senha:
+    for usu in data:
+        if usu.get("usuario") == usuario:
+
+            if usu.get("senha") != senha:
                 return erro_html( "Senha Incorreta" )
 
-            response = make_response( redirect("/livros", code=302) )
-            response.set_cookie( "nome_usuario", u.get("usuario") )
-            return response
+            resposta = redirect("/livros", code=301)
+            resposta.set_cookie( "nome_usuario", usu.get("usuario") )
+            return resposta
+
     return erro_html( "Usuario não encontrado" )
 
 @app.route( '/cadastre', methods=["POST"] )
@@ -55,16 +55,16 @@ def cadastro():
                 }
 
                 usuarios.append( novo_usuario )
-                escrever_arquivo( "data/usuario.json", json.dumps( usuarios ) )
+                escrever_arquivo( "data/usuario.json", usuarios )
 
-                response = make_response( f"Usuário cadastrado com sucesso" )
-                return response
+                resposta = make_response( f"Usuário cadastrado com sucesso" )
+                return resposta
 
     return erro_html( "Usuario não encontrado" )
 
 @app.route( '/sair', methods=["POST"] )
 def sair():
-    resposta = make_response( redirect( "/index.html", code=200 ) )
+    resposta = redirect( "/index.html", code=301 )
     resposta.delete_cookie( "nome_usuario" )
     return resposta
 
@@ -97,8 +97,7 @@ def get_livros_por_id( id ):
 
             return render_template( "unico_livro.html", livro=data )
 
-    resposta = make_response( redirect( "/login/index.html", code=401 ) )
-    return resposta
+    return redirect( "/login/index.html", code=301 )
 
 @app.route( "/add-livro", methods=["POST"] )
 def add_livro():
@@ -111,8 +110,13 @@ def add_livro():
             if usu.get("admin") == False:
                 return erro_html( "Você não tem permissão para cadastrar livros" )
 
+            maior = -1
+            for d in abrir_arquivo( "data/livros.json" ):
+                if d.get("id") > maior:
+                    maior = d.get("id")
+
             novo_livro = {
-                "id": maior_id() + 1,
+                "id": maior + 1,
                 "disponivel": True,
                 "titulo": request.form.get("titulo"),
                 "autor": request.form.get("autor")
@@ -122,7 +126,7 @@ def add_livro():
             data.append( novo_livro )
             escrever_arquivo( "data/livros.json", data )
 
-    return redirect("/livros", code=302)
+    return redirect( "/livros", code=301 )
 
 if __name__ == '__main__':
     app.run( '127.0.0.1', 3030, debug=True )

@@ -17,13 +17,3 @@ def abrir_arquivo( caminho ):
     data_arquivo.close()
     return json.loads( texto )
 
-def maior_id():
-    data_arquivo = open( "data/livros.json" )
-    data = json.loads( data_arquivo.read() )
-    data_arquivo.close()
-
-    maior = 0
-    for d in data:
-        if d["id"] > maior:
-            maior = d["id"]
-    return maior
