@@ -1,5 +1,21 @@
 from flask import Flask, request, send_from_directory, redirect, make_response, render_template
-from util import erro_html, escrever_arquivo, abrir_arquivo
+import json
+
+def erro_html( mensagem ):
+    return make_response( f"<p style=\"color:red;\">{mensagem}</p>\
+                            <a href=\"/index.html\">Voltar</a>" )
+
+def escrever_arquivo( caminho, data ):
+    data_arquivo = open( caminho, "w" )
+    texto = json.dumps( data )
+    data_arquivo.write( texto )
+    data_arquivo.close()
+
+def abrir_arquivo( caminho ):
+    data_arquivo = open( caminho )
+    texto = data_arquivo.read()
+    data_arquivo.close()
+    return json.loads( texto )
 
 app = Flask(__name__)
 
@@ -28,7 +44,7 @@ def paginas_publicas( path ):
 @app.route('/privado/<path:path>')
 def paginas_privadas( path ):
     cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "data/usuario.json" )
+    usuarios = abrir_arquivo( "serv/data/usuario.json" )
 
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
@@ -57,7 +73,7 @@ def paginas_privadas( path ):
 '''
 @app.route( '/login', methods=["POST"] )
 def login():
-    for usu in abrir_arquivo( "data/usuario.json" ):
+    for usu in abrir_arquivo( "serv/data/usuario.json" ):
         if usu.get("usuario") == request.form.get("usuario"):
 
             if usu.get("senha") != request.form.get("senha"):
@@ -75,7 +91,7 @@ def login():
 @app.route( '/cadastre', methods=["POST"] )
 def cadastro():
     cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "data/usuario.json" )
+    usuarios = abrir_arquivo( "serv/data/usuario.json" )
 
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
@@ -90,7 +106,7 @@ def cadastro():
                 }
 
                 usuarios.append( novo_usuario )
-                escrever_arquivo( "data/usuario.json", usuarios )
+                escrever_arquivo( "serv/data/usuario.json", usuarios )
 
                 resposta = make_response( "Usuário cadastrado com sucesso" )
                 return resposta
@@ -106,11 +122,11 @@ def sair():
 @app.route( "/livros", methods=["GET"] )
 def get_livros():
     cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "data/usuario.json" )
+    usuarios = abrir_arquivo( "serv/data/usuario.json" )
 
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
-            data = abrir_arquivo( "data/livros.json" )
+            data = abrir_arquivo( "serv/data/livros.json" )
             return render_template( "get_livros.html", livros=data, adm=usu.get("admin") )
 
     return erro_html( "Usuario não encontrado" )
@@ -118,12 +134,12 @@ def get_livros():
 @app.route( "/livros/id/<int:id>", methods=["GET"] )
 def get_livros_por_id( id ):
     cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "data/usuario.json" )
+    usuarios = abrir_arquivo( "serv/data/usuario.json" )
 
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
 
-            pre_data = abrir_arquivo( "data/livros.json" )
+            pre_data = abrir_arquivo( "serv/data/livros.json" )
             data = {}
             for d in pre_data:
                 if d.get("id") == id:
@@ -137,7 +153,7 @@ def get_livros_por_id( id ):
 @app.route( "/add-livro", methods=["POST"] )
 def add_livro():
     cookie_usuario = request.cookies.get("nome_usuario")
-    data = abrir_arquivo( "data/usuario.json" )
+    data = abrir_arquivo( "serv/data/usuario.json" )
 
     for usu in data:
         if usu.get("usuario") == cookie_usuario :
@@ -146,7 +162,7 @@ def add_livro():
                 return erro_html( "Você não tem permissão para cadastrar livros" )
 
             maior = -1
-            for d in abrir_arquivo( "data/livros.json" ):
+            for d in abrir_arquivo( "serv/data/livros.json" ):
                 if d.get("id") > maior:
                     maior = d.get("id")
 
@@ -163,4 +179,7 @@ def add_livro():
 
     return redirect( "/livros", code=301 )
 
-app.run( '127.0.0.1', 3030, debug=True )
+if __name__ == "__main__":
+    app.run( host="0.0.0.0", port=3000, debug=True )
+    # from waitress import serve
+    # serve( app, host="0.0.0.0", port=3000 )

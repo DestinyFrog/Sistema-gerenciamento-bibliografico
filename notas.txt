@@ -1,3 +1,0 @@
-404 => Pagina nao encontrada
-200 => tudo certo
-302 => autenticação incorreta

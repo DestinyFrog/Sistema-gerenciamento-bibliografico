@@ -10,7 +10,10 @@
 </head>
 
 <body>
-    <a href="/privado/add_livro/index.html">Adicionar Livro</a>
+    {% if adm == True %}
+        <a href="/privado/add_livro/index.html">Adicionar Livro</a>
+    {% endif %}
+
     <form method="POST" action="/sair">
         <input type="submit" value="Sair">
     </form>
