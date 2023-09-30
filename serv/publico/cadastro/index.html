@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Cadastro</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
     <main>
 
-        <h1 id="titulo">Login</h1>
+        <h1 id="titulo">Cadastre-se</h1>
     
-        <form action="/login" method="POST">
+        <form action="/cadastre" method="POST">
 
             <div id="container">
 
@@ -21,16 +21,13 @@
 
                 <label for="senha_inp">Senha:</label>
                 <input id="senha_inp" name="senha" required="required" type="password" placeholder="ex. 1234" />
-                
             </div>
 
-            <input type="submit" value="Entrar" id="button">
+            <input type="submit" value="Criar" id="button">
         
         </form>
 
-        <p class="link">Não tem conta? <a href="/cadastro/index.html">Cadastre-se</a></p>
+        <p class="link">Já tem uma conta? <a href="/index.html">Faça login</a></p>
 
     </main>
 </body>
-
-</html>

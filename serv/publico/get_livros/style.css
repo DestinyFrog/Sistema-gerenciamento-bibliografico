@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #fafafa;
+  color: white;
+  font-weight: 500;
+  display: flex;
+  justify-content: stretch;
+  min-height: 100vh;
+  min-width: 100vw;
+
+  /*Aqui no caso seria o fundo*/
+  background-color: #cc2121;
+  background-image: url("https://i.pinimg.com/originals/66/4d/2a/664d2a0d4145a08503a0acfd5dd8366e.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+#container-pesquisa {
+  width: 40vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#container-livros {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: fit-content;
+}
+
+table {
+  background-color: aliceblue;
+}
+
+table tr {
+  background-color: #552cb7;
+}
+
+table tr:nth-child(even) {
+  background-color: #5b86cb;
+}
+
+thead tr {
+  background-color: aliceblue;
+  color: black;
+}
+
+tbody tr:hover {
+  background-color: #ab2c48;
+}
+
+th, td {
+  padding: 5px;
+  font-size: 15px;
+  max-width: 250px;
+}
+
+tbody tr td:last-child {
+  font-size: 20px;
+  text-align: center;
+}
+
+#container-pesquisa h1 {
+  color: #ffffff;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  justify-content: space-between;
+
+  background-color: #161923;
+  padding: 0 0.5rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  border: 1px solid #fafcff;
+  border-radius: 8px;
+}
+
+form input {
+  outline: none;
+  padding: 10px;
+  background-color: transparent;
+  color: rgba(166, 166, 166);
+}
+
+a {
+  color: #ffffff;
+}
+
+@media(max-width:700px) {
+  #container-pesquisa {
+    width: 100vw;
+    height: auto;
+  }
+
+  body {
+    flex-direction: column;
+    padding-bottom: 40px;
+  }
+}

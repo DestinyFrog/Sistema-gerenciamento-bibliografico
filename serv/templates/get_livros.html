@@ -5,36 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acervo</title>
 
-    <link rel="stylesheet" href="/global.css">
     <link rel="stylesheet" href="/get_livros/style.css">
+    <link rel="stylesheet" href="/global.css">
 </head>
 
 <body>
-    {% if adm == True %}
-        <a href="/privado/add_livro/index.html">Adicionar Livro</a>
-    {% endif %}
+    <a href="/sair">
+        Sair
+    </a>
 
-    <form method="POST" action="/sair">
-        <input type="submit" value="Sair">
-    </form>
+    <nav id="container-pesquisa">
+        <h1>Biblioteca online</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Disponível</th>
-            </tr>
-        </thead>
+        {% if adm == True %}
+            <a href="/privado/add_livro/index.html">Adicionar Livro</a>
+        {% else %}
+            <p style="color:red;">Você não ter permissão para adicionar livros</p>
+        {% endif %}
 
-        {% for livro in livros %}
-            <tr>
-                <td><a href="/livros/id/{{livro.id}}">{{ livro.titulo }}</a></td>
-                <td>{{ livro.autor }}</td>
-                <td>{{ "✅" if livro.disponivel else "❌" }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+        <form action>
+            <input id="nome_cad" name="titulo" required="required" type="text" placeholder="Busque o livro desejado" />
+            <input type="submit" value="Procurar" id="button">
+        </form>
+    </nav>
+
+    <nav id="container-livros">
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Disponível</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for livro in livros %}
+                <tr>
+                    <td><a href="/livros/id/{{livro.id}}">{{
+                            livro.titulo }}</a></td>
+                    <td>{{ livro.autor }}</td>
+                    <td>{{ "✅" if livro.disponivel else "❌" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </nav>
+
 </body>
 
 </html>

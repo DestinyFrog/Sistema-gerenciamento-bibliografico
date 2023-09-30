@@ -108,14 +108,15 @@ def cadastro():
                 usuarios.append( novo_usuario )
                 escrever_arquivo( "serv/data/usuario.json", usuarios )
 
-                resposta = make_response( "Usuário cadastrado com sucesso" )
-                return resposta
+                #resposta = make_response( "Usuário cadastrado com sucesso" )
+                #return resposta
+                return redirect( "/index.html", code=302 )
 
     return erro_html( "Usuario não encontrado" )
 
-@app.route( '/sair', methods=["POST"] )
+@app.route( '/sair', methods=["GET"] )
 def sair():
-    resposta = redirect( "/index.html", code=301 )
+    resposta = redirect( "/index.html", code=302 )
     resposta.delete_cookie( "nome_usuario" )
     return resposta
 
@@ -173,9 +174,9 @@ def add_livro():
                 "autor": request.form.get("autor")
             }
 
-            data = abrir_arquivo( "data/livros.json" )
+            data = abrir_arquivo( "serv/data/livros.json" )
             data.append( novo_livro )
-            escrever_arquivo( "data/livros.json", data )
+            escrever_arquivo( "serv/data/livros.json", data )
 
     return redirect( "/livros", code=301 )
 

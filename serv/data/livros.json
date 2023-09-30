@@ -1,1 +1,68 @@
-[{"titulo": "Mem\u00f3rias P\u00f3stumas de Br\u00e1s Cubas", "autor": "Machado de Assis", "id": 1, "disponivel": true}, {"titulo": "1984", "autor": "George Orwell", "id": 2, "disponivel": true}, {"titulo": "O Conto de Aia", "autor": "Margaret Atwood", "id": 3, "disponivel": true}, {"id": 4, "disponivel": true, "titulo": "Meu P\u00e9 de Laranja Lima", "autor": "Jos\u00e9 Mauro de Vasconcelos"}]
+[
+    {
+        "id": 1,
+        "disponivel": true,
+        "titulo": "Voc\u00ea Ligou para Sam",
+        "autor": "Dustin Thao"
+    },
+    {
+        "id": 2,
+        "disponivel": true,
+        "titulo": "Jantar Secreto",
+        "autor": "Rafael Montes"
+    },
+    {
+        "id": 3,
+        "disponivel": true,
+        "titulo": "Morte no Nilo",
+        "autor": "Agatha Christie"
+    },
+    {
+        "id": 4,
+        "disponivel": true,
+        "titulo": "Hist\u00f3ria de uma Alma",
+        "autor": "Teresa de Lisieux"
+    },
+    {
+        "id": 5,
+        "disponivel": true,
+        "titulo": "A Elite",
+        "autor": "Kiera Cass"
+    },
+    {
+        "id": 6,
+        "disponivel": true,
+        "titulo": "It a Coisa",
+        "autor": "Stephen King"
+    },
+    {
+        "id": 7,
+        "disponivel": true,
+        "titulo": "Para N\u00e3o Desistir do Amor",
+        "autor": "Matheus Rocha"
+    },
+    {
+        "id": 8,
+        "disponivel": true,
+        "titulo": "Contos de fadas dos irm\u00e3os Grimm",
+        "autor": "Irm\u00e3os Grimm"
+    },
+    {
+        "id": 9,
+        "disponivel": true,
+        "titulo": "Minha Vida Fora de S\u00e9rie",
+        "autor": "Paula Pimenta"
+    },
+    {
+        "id": 10,
+        "disponivel": true,
+        "titulo": "O \u00d3dio que Voc\u00ea Semeia",
+        "autor": "Angie Thomas"
+    },
+    {
+        "id": 11,
+        "disponivel": true,
+        "titulo": "Cemit\u00e9rio Maldito",
+        "autor": "Stephen King"
+    }
+]
