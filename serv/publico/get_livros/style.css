@@ -33,6 +33,7 @@ body {
 }
 
 #container-livros {
+  width: 100%;
   display: flex;
   justify-content: center;
   padding-top: 50px;
@@ -43,6 +44,7 @@ body {
 
 table {
   background-color: aliceblue;
+  width: 100%;
 }
 
 table tr {
@@ -65,7 +67,7 @@ tbody tr:hover {
 th, td {
   padding: 5px;
   font-size: 15px;
-  max-width: 250px;
+  width: 33%;
 }
 
 tbody tr td:last-child {

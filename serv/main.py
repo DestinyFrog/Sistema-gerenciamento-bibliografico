@@ -120,14 +120,25 @@ def sair():
     resposta.delete_cookie( "nome_usuario" )
     return resposta
 
-@app.route( "/livros", methods=["GET"] )
+@app.route( "/livros", methods=["GET","POST"] )
 def get_livros():
     cookie_usuario = request.cookies.get("nome_usuario")
     usuarios = abrir_arquivo( "serv/data/usuario.json" )
 
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
-            data = abrir_arquivo( "serv/data/livros.json" )
+
+            proc = request.form.get("proc")
+
+            if proc and proc != "":
+                proc = proc.lower()
+                data = []
+                for liv in abrir_arquivo( "serv/data/livros.json" ):
+                    if proc in liv.get("titulo").lower() or proc in liv.get("autor").lower():
+                        data.append( liv )
+            else:
+                data = abrir_arquivo( "serv/data/livros.json" )
+
             return render_template( "get_livros.html", livros=data, adm=usu.get("admin") )
 
     return erro_html( "Usuario não encontrado" )
@@ -181,6 +192,6 @@ def add_livro():
     return redirect( "/livros", code=301 )
 
 if __name__ == "__main__":
-    app.run( host="0.0.0.0", port=3000, debug=True )
-    # from waitress import serve
-    # serve( app, host="0.0.0.0", port=3000 )
+    #app.run( host="0.0.0.0", port=3000, debug=True )
+    from waitress import serve
+    serve( app, host="0.0.0.0", port=80 )

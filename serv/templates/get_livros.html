@@ -23,8 +23,8 @@
             <p style="color:red;">Você não ter permissão para adicionar livros</p>
         {% endif %}
 
-        <form action>
-            <input id="nome_cad" name="titulo" required="required" type="text" placeholder="Busque o livro desejado" />
+        <form action="/livros" method="POST">
+            <input id="nome_cad" name="proc" type="text" placeholder="Busque o livro desejado" />
             <input type="submit" value="Procurar" id="button">
         </form>
     </nav>
