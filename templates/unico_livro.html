@@ -15,12 +15,6 @@
     <nav id="container-pesquisa">
         <h1>Biblioteca online</h1>
 
-        {% if adm == True %}
-            <a href="/privado/add_livro/index.html">Adicionar Livro</a>
-        {% else %}
-            <p style="color:red;">Você não ter permissão para adicionar livros</p>
-        {% endif %}
-
         <form action="/livros" method="POST">
             <input id="nome_cad" name="proc" type="text" placeholder="Busque o livro desejado" />
             <input type="submit" value="Procurar" id="button">

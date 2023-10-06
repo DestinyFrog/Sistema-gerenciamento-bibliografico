@@ -1,53 +1,50 @@
 * {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	box-sizing: border-box;
 	font-family: "Poppins", sans-serif;
-  }
-  
-  body {
-	background: #fafafa;
+}
+
+body {
 	color: white;
 	font-weight: 500;
-	display: flex;
-	justify-content: stretch;
+
+	width: 100vw;
 	min-height: 100vh;
-	min-width: 100vw;
-  
-	/*Aqui no caso seria o fundo*/
+
 	background-color: #cc2121;
 	background-image: url("https://i.pinimg.com/originals/66/4d/2a/664d2a0d4145a08503a0acfd5dd8366e.gif");
 	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: 50% 50%;
-  }
-  
-  #container-pesquisa {
+	background-size: auto;
+	background-position-x: center;
+}
+
+#container-pesquisa {
 	position: fixed;
 	top: 0;
 	left: 0;
+
 	width: 40vw;
 	height: 100vh;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-  }
-  
-  #container-livros {
+}
+
+#container-livros {
 	position: absolute;
 	right: 0;
 	top: 0;
+
 	width: 60vw;
+
 	display: flex;
 	justify-content: center;
+
 	padding: 20px;
-	padding-top: 50px;
-	height: fit-content;
-  }
-  
-  #container-unico-livro {
+	padding-top: 30px;
+}
+
+#container-unico-livro {
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -58,96 +55,98 @@
 	padding: 20px;
 	padding-top: 50px;
 	height: fit-content;
-  }
-  
-  #container-unico-livro section {
+}
+
+#container-unico-livro section {
 	width: auto;
 	padding: 20px;
 	border-radius: 20px;
 	background-color: #5b86cb;
-  }
-  
-  table {
+}
+
+table {
 	background-color: aliceblue;
-	width: 100%;
-  }
-  
-  table tr {
+	width: 90%;
+	height: 90vh;
+	overflow: scroll;
+}
+
+table tr {
 	background-color: #552cb7;
-  }
-  
-  table tr:nth-child(even) {
+}
+
+table tr:nth-child(even) {
 	background-color: #5b86cb;
-  }
-  
-  thead tr {
+}
+
+thead tr {
 	background-color: aliceblue;
 	color: black;
-  }
-  
-  tbody tr:hover {
+}
+
+tbody tr:hover {
 	background-color: #ab2c48;
-  }
-  
-  th, td {
+}
+
+th,
+td {
 	padding: 5px;
 	font-size: 15px;
 	width: 33%;
-  }
-  
-  tbody tr td:last-child {
+}
+
+tbody tr td:last-child {
 	font-size: 20px;
 	text-align: center;
-  }
-  
-  #container-pesquisa h1 {
+}
+
+#container-pesquisa h1 {
 	color: #ffffff;
 	font-size: 3rem;
 	margin-bottom: 3rem;
 	text-align: center;
-  }
-  
-  form {
+}
+
+form {
 	display: flex;
 	flex-direction: row;
 	width: auto;
 	justify-content: space-between;
-  
+
 	background-color: #161923;
 	padding: 0 0.5rem;
 	margin-top: 1rem;
 	font-size: 1rem;
 	border: 1px solid #fafcff;
 	border-radius: 8px;
-  }
-  
-  form input {
+}
+
+form input {
 	outline: none;
 	padding: 10px;
 	background-color: transparent;
 	color: rgba(166, 166, 166);
-  }
-  
-  a {
+}
+
+a {
 	color: #ffffff;
 	text-decoration: solid;
-  }
-  
-  @media(max-width:700px) {
+}
+
+@media(max-width:700px) {
 	#container-pesquisa {
-	  position: static;
-	  width: 100vw;
-	  height: 30vh;
-	  height: auto;
+		position: static;
+		width: 100vw;
+		height: 30vh;
 	}
-  
+
 	#container-livros {
-	  position: static;
-	  width: 100vw;
+		position: static;
+		width: 100vw;
 	}
-  
+
 	body {
-	  flex-direction: column;
-	  padding-bottom: 40px;
+		flex-direction: column;
+		padding-bottom: 40px;
 	}
-  }
+}
