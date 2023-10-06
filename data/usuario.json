@@ -1,14 +1,1 @@
-[
-	{
-		"usuario": "Admin",
-		"senha": "teract",
-		"admin": true,
-		"agendamento": []
-	},
-	{
-		"usuario": "NaoAdmin",
-		"senha": "teract",
-		"admin": false,
-		"agendamento": []
-	}
-]
+[{"usuario": "Admin", "senha": "teract", "admin": true, "agendamento": []}, {"usuario": "NaoAdmin", "senha": "teract", "admin": false, "agendamento": [4]}]

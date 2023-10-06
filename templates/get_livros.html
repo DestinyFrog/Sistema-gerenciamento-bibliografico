@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <a id="sair" href="/sair">Sair</a>
+    <a href="/sair" id="sair">Sair</a>
 
     <nav id="container-pesquisa">
         <h1>Biblioteca online</h1>
@@ -39,7 +39,7 @@
 
             <tbody>
                 {% for livro in livros %}
-                <tr onclick="location.href = '/livros/id/{{ livro.id }}'">
+                <tr height="20px" onclick="location.href = '/livros/id/{{ livro.id }}'">
                     <td><a href="/livros/id/{{livro.id}}">{{
                             livro.titulo }}</a></td>
                     <td>{{ livro.autor }}</td>

@@ -3,6 +3,8 @@
 }
 
 body {
+	margin-top: 40px;
+
 	color: white;
 	font-weight: 500;
 
@@ -11,9 +13,13 @@ body {
 
 	background-color: #cc2121;
 	background-image: url("https://i.pinimg.com/originals/66/4d/2a/664d2a0d4145a08503a0acfd5dd8366e.gif");
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 	background-size: auto;
 	background-position-x: center;
+}
+
+h1, p, input {
+	overflow-y: hidden;
 }
 
 #container-pesquisa {
@@ -49,26 +55,24 @@ body {
 	right: 0;
 	top: 0;
 	width: 60vw;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+
 	padding: 20px;
 	padding-top: 50px;
-	height: fit-content;
+	height: auto;
 }
 
 #container-unico-livro section {
 	width: auto;
 	padding: 20px;
 	border-radius: 20px;
-	background-color: #5b86cb;
+	background-color: #ab2c48;
 }
 
 table {
 	background-color: aliceblue;
 	width: 90%;
-	height: 90vh;
-	overflow: scroll;
+	height: auto;
+	table-layout:fixed; 
 }
 
 table tr {
@@ -93,6 +97,7 @@ td {
 	padding: 5px;
 	font-size: 15px;
 	width: 33%;
+	height: 20px;
 }
 
 tbody tr td:last-child {
@@ -133,6 +138,11 @@ a {
 	text-decoration: solid;
 }
 
+#botao-agendar {
+	padding: 5px;
+	border-bottom: 1px solid aliceblue;
+}
+
 @media(max-width:700px) {
 	#container-pesquisa {
 		position: static;
@@ -143,6 +153,11 @@ a {
 	#container-livros {
 		position: static;
 		width: 100vw;
+	}
+
+	#container-unico-livro {
+		position: static;
+		width: 100%;
 	}
 
 	body {

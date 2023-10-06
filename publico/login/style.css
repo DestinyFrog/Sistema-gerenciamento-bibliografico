@@ -91,10 +91,6 @@ input[type="submit"]:hover {
     background: #000000;
 }
 
-a {
-    color:#ffffff;
-}
-
 @media(max-width:770px) {
     main {
         width: 100vw;

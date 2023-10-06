@@ -18,6 +18,7 @@ def abrir_arquivo( caminho ):
 
 app = Flask(__name__)
 
+#! Redireciona o caminho "/" para "/login/index.html"
 @app.route("/")
 def ini():
     return redirect( "/login/index.html", code=302 )
@@ -89,41 +90,28 @@ def login():
 
 #! Realiza cadastro de novos usuarios
 '''
-
+	
 '''
 @app.route( "/cadastre", methods=["POST"] )
 def cadastro():
-    cookie_usuario = request.cookies.get("nome_usuario")
     usuarios = abrir_arquivo( "data/usuario.json" )
-
-    for usu in usuarios:
-        if usu.get("usuario") == cookie_usuario:
-        
-            if usu.get("admin") == False:
-                return erro_html( "Você não tem permissão para criar usuários" )
-            else:
-                novo_usuario = {
-                    "usuario": request.form.get("usuario"),
-                    "senha": request.form.get("senha"),
-                    "admin": request.form.get("admin") == "on"
-                }
-
-                usuarios.append( novo_usuario )
-                escrever_arquivo( "data/usuario.json", usuarios )
-
-                #resposta = make_response( "Usuário cadastrado com sucesso" )
-                #return resposta
-                return redirect( "/index.html", code=302 )
-
-    return erro_html( "Usuario não encontrado" )
+    novo_usuario = {
+		"usuario": request.form.get("usuario"),
+		"senha": request.form.get("senha"),
+		"admin": request.form.get("admin") == "on"
+	}
+    usuarios.append( novo_usuario )
+    escrever_arquivo( "data/usuario.json", usuarios )
+    return redirect( "/index.html", code=302 )
 
 #! Sai do site e apaga os cookies
 '''
-    
+    Cria uma resposta para redirecionar a pagina para o login
+    remove os cookies que identificam o usuario
 '''
 @app.route( "/sair", methods=["GET"] )
 def sair():
-    resposta = redirect( "/index.html", code=302 )
+    resposta = redirect( "/", code=302 )
     resposta.delete_cookie( "nome_usuario" )
     return resposta
 
@@ -224,4 +212,4 @@ def add_livro():
     return redirect( "/livros", code=301 )
 
 if __name__ == "__main__":
-    app.run( host="0.0.0.0", port=80, debug=True )
+    app.run( host="0.0.0.0", port=3000, debug=True )
