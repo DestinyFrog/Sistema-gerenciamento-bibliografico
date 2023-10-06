@@ -2,8 +2,7 @@ from flask import Flask, request, send_from_directory, redirect, make_response, 
 import json
 
 def erro_html( mensagem ):
-    return make_response( f"<p style=\"color:red;\">{mensagem}</p>\
-                            <a href=\"/index.html\">Voltar</a>" )
+    return make_response( f"<p style=\"color:red;\">{mensagem}</p>\<a href=\"/login/index.html\">Voltar</a>" )
 
 def escrever_arquivo( caminho, data ):
     data_arquivo = open( caminho, "w" )
@@ -18,6 +17,10 @@ def abrir_arquivo( caminho ):
     return json.loads( texto )
 
 app = Flask(__name__)
+
+@app.route("/")
+def ini():
+    return redirect( "/login/index.html", code=302 )
 
 #! Paginas estaticas sem autenticacao
 '''
@@ -44,7 +47,7 @@ def paginas_publicas( path ):
 @app.route('/privado/<path:path>')
 def paginas_privadas( path ):
     cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "serv/data/usuario.json" )
+    usuarios = abrir_arquivo( "data/usuario.json" )
 
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
@@ -73,7 +76,7 @@ def paginas_privadas( path ):
 '''
 @app.route( '/login', methods=["POST"] )
 def login():
-    for usu in abrir_arquivo( "serv/data/usuario.json" ):
+    for usu in abrir_arquivo( "data/usuario.json" ):
         if usu.get("usuario") == request.form.get("usuario"):
 
             if usu.get("senha") != request.form.get("senha"):
@@ -88,10 +91,10 @@ def login():
 '''
 
 '''
-@app.route( '/cadastre', methods=["POST"] )
+@app.route( "/cadastre", methods=["POST"] )
 def cadastro():
     cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "serv/data/usuario.json" )
+    usuarios = abrir_arquivo( "data/usuario.json" )
 
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
@@ -106,7 +109,7 @@ def cadastro():
                 }
 
                 usuarios.append( novo_usuario )
-                escrever_arquivo( "serv/data/usuario.json", usuarios )
+                escrever_arquivo( "data/usuario.json", usuarios )
 
                 #resposta = make_response( "Usuário cadastrado com sucesso" )
                 #return resposta
@@ -114,7 +117,11 @@ def cadastro():
 
     return erro_html( "Usuario não encontrado" )
 
-@app.route( '/sair', methods=["GET"] )
+#! Sai do site e apaga os cookies
+'''
+    
+'''
+@app.route( "/sair", methods=["GET"] )
 def sair():
     resposta = redirect( "/index.html", code=302 )
     resposta.delete_cookie( "nome_usuario" )
@@ -123,7 +130,7 @@ def sair():
 @app.route( "/livros", methods=["GET","POST"] )
 def get_livros():
     cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "serv/data/usuario.json" )
+    usuarios = abrir_arquivo( "data/usuario.json" )
 
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
@@ -133,25 +140,50 @@ def get_livros():
             if proc and proc != "":
                 proc = proc.lower()
                 data = []
-                for liv in abrir_arquivo( "serv/data/livros.json" ):
+                for liv in abrir_arquivo( "data/livros.json" ):
                     if proc in liv.get("titulo").lower() or proc in liv.get("autor").lower():
                         data.append( liv )
             else:
-                data = abrir_arquivo( "serv/data/livros.json" )
+                data = abrir_arquivo( "data/livros.json" )
 
             return render_template( "get_livros.html", livros=data, adm=usu.get("admin") )
+
+    return erro_html( "Usuario não encontrado" )
+
+@app.route( "/agendar/<int:id>", methods=["GET"] )
+def agendar( id ):
+    cookie_usuario = request.cookies.get("nome_usuario")
+    usuarios = abrir_arquivo( "data/usuario.json" )
+
+    for usu in usuarios:
+        if usu.get("usuario") == cookie_usuario:
+
+            if len( usu.get("agendamento") ) >= 2:
+                return erro_html( "Você já agendou o máximo de livros (2)" )
+
+            livros = abrir_arquivo( "data/livros.json" )
+            for liv in livros:
+                if liv.get("id") == id:
+                    liv["disponivel"] = ( liv["disponivel"] == False )
+
+            escrever_arquivo( "data/livros.json", livros )
+
+            usu["agendamento"].append( id )
+            escrever_arquivo( "data/usuario.json", usuarios )
+
+            return redirect( f"/livros/id/{id}", code=302 )
 
     return erro_html( "Usuario não encontrado" )
 
 @app.route( "/livros/id/<int:id>", methods=["GET"] )
 def get_livros_por_id( id ):
     cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "serv/data/usuario.json" )
+    usuarios = abrir_arquivo( "data/usuario.json" )
 
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
 
-            pre_data = abrir_arquivo( "serv/data/livros.json" )
+            pre_data = abrir_arquivo( "data/livros.json" )
             data = {}
             for d in pre_data:
                 if d.get("id") == id:
@@ -165,7 +197,7 @@ def get_livros_por_id( id ):
 @app.route( "/add-livro", methods=["POST"] )
 def add_livro():
     cookie_usuario = request.cookies.get("nome_usuario")
-    data = abrir_arquivo( "serv/data/usuario.json" )
+    data = abrir_arquivo( "data/usuario.json" )
 
     for usu in data:
         if usu.get("usuario") == cookie_usuario :
@@ -174,7 +206,7 @@ def add_livro():
                 return erro_html( "Você não tem permissão para cadastrar livros" )
 
             maior = -1
-            for d in abrir_arquivo( "serv/data/livros.json" ):
+            for d in abrir_arquivo( "data/livros.json" ):
                 if d.get("id") > maior:
                     maior = d.get("id")
 
@@ -185,13 +217,11 @@ def add_livro():
                 "autor": request.form.get("autor")
             }
 
-            data = abrir_arquivo( "serv/data/livros.json" )
+            data = abrir_arquivo( "data/livros.json" )
             data.append( novo_livro )
-            escrever_arquivo( "serv/data/livros.json", data )
+            escrever_arquivo( "data/livros.json", data )
 
     return redirect( "/livros", code=301 )
 
 if __name__ == "__main__":
-    #app.run( host="0.0.0.0", port=3000, debug=True )
-    from waitress import serve
-    serve( app, host="0.0.0.0", port=80 )
+    app.run( host="0.0.0.0", port=80, debug=True )

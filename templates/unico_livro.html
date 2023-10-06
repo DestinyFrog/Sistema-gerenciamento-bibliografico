@@ -10,9 +10,7 @@
 </head>
 
 <body>
-    <a href="/sair">
-        Sair
-    </a>
+    <a id="sair" href="/sair">Sair</a>
 
     <nav id="container-pesquisa">
         <h1>Biblioteca online</h1>
@@ -29,30 +27,25 @@
         </form>
     </nav>
 
-    <nav id="container-livros">
-        <table>
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Disponível</th>
-                </tr>
-            </thead>
+    <nav id="container-unico-livro">
+        <section>
 
-            <tbody>
-                {% for livro in livros %}
-                <tr>
-                    <td><a href="/livros/id/{{livro.id}}">{{
-                            livro.titulo }}</a></td>
-                    <td>{{ livro.autor }}</td>
-                    <td>{{ "✅" if livro.disponivel else "❌" }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
+            <h1>{{ livro.titulo }}</h1>
+            <hr/>
+            <h3>{{ livro.autor }}</h3>
+            <h3 style="color: {{ 'green' if livro.disponivel else 'red' }}">{{
+                "Disponível para Empréstimo"
+                if livro.disponivel else
+                "Não disponível para Empréstimo"
+            }}</h3>
 
-        </table>
+            {% if livro.disponivel %}
+                <a href="/agendar/{{ livro.id }}">Agendar empréstimo</a>
+            {% endif %}
+
+        </section>
+
     </nav>
-
 </body>
 
 </html>

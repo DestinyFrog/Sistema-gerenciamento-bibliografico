@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acervo</title>
+
+    <link rel="stylesheet" href="/get_livros/style.css">
+    <link rel="stylesheet" href="/global.css">
+</head>
+
+<body>
+    <a id="sair" href="/sair">Sair</a>
+
+    <nav id="container-pesquisa">
+        <h1>Biblioteca online</h1>
+
+        {% if adm == True %}
+            <a href="/privado/add_livro/index.html">Adicionar Livro</a>
+        {% else %}
+            <p style="color:red;">Você não ter permissão para adicionar livros</p>
+        {% endif %}
+
+        <form action="/livros" method="POST">
+            <input id="nome_cad" name="proc" type="text" placeholder="Busque o livro desejado" />
+            <input type="submit" value="Procurar" id="button">
+        </form>
+    </nav>
+
+    <nav id="container-livros">
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Disponível</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for livro in livros %}
+                <tr onclick="location.href = '/livros/id/{{ livro.id }}'">
+                    <td><a href="/livros/id/{{livro.id}}">{{
+                            livro.titulo }}</a></td>
+                    <td>{{ livro.autor }}</td>
+                    <td>{{ "✅" if livro.disponivel else "❌" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </nav>
+
+</body>
+
+</html>
