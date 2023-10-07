@@ -5,6 +5,9 @@
 	border: 0;
 	box-sizing: border-box;
 
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: bold;
+
 	overflow-x: hidden;
 }
 
@@ -14,7 +17,7 @@
     left: 20px;
 	z-index: 5;
 
-	text-decoration: underline;
+	text-decoration: none;
 	cursor: pointer;
 
 	aspect-ratio: 1/1;

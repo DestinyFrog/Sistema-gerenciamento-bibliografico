@@ -1,23 +1,14 @@
 from flask import Flask, request, send_from_directory, redirect, make_response, render_template
-import json
+from memoria import Arquivo
 
 # Retorna uma mensagem de erro em forma de HTML
 def erro_html( mensagem ):
-    return make_response( f"<p style=\"color:red;\">{mensagem}</p>\<a href=\"/login/index.html\">Voltar</a>" )
+    resposta = make_response( f"<p style=\"color:red;\">{mensagem}</p>\<a href=\"/login/index.html\">Voltar</a>" )
+    resposta.status_code = 401
+    return resposta
 
-# Reescreve um arquivo em dicionario/lista python para JSON
-def escrever_arquivo( caminho, data ):
-    data_arquivo = open( caminho, "w" )
-    texto = json.dumps( data )
-    data_arquivo.write( texto )
-    data_arquivo.close()
-
-# Le um arquivo como JSON para dicionario/lista python
-def abrir_arquivo( caminho ):
-    data_arquivo = open( caminho )
-    texto = data_arquivo.read()
-    data_arquivo.close()
-    return json.loads( texto )
+arq_usuarios = Arquivo( "./data/usuario.json" )
+arq_livros = Arquivo( "./data/livros.json" )
 
 app = Flask(__name__)
 
@@ -27,102 +18,80 @@ def ini():
     return redirect( "/login/index.html", code=302 )
 
 #! Paginas estaticas sem autenticacao
-'''
-    Envia a pagina que esta no
-    caminho especificado na rota
-'''
 @app.route('/<path:path>')
-def paginas_publicas( path ):
+def paginas_publicas( path:str ):
+    # retorna a pagina requerida
     return send_from_directory('publico', path)
 
-#! Paginas estaticas com autenticacao
-'''
-    procura no caminho especificado,
-    porem antes verifica se nos cookies:
-        - O usuario existe;
-        - O usuario é um administrador;
-    e por fim se ambos forem verdadeiros
-    envia a pagina
-    caso contrario retorna um erro
-    que podem ser:
-        - Usuario não tem permissao para acessar essa pagina
-        - Usuario nao foi encontrado
-'''
+#! Paginas estaticas com autenticacao de administrador
 @app.route('/privado/<path:path>')
-def paginas_privadas( path ):
-    cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "data/usuario.json" )
+def paginas_privadas( path:str ):    
+    # procura por um usuario com o mesmo nome do usuario na base de dados 'usuarios'
+    usu = arq_usuarios.encontrar_um( "usuario", request.cookies.get("usuario") )
 
-    for usu in usuarios:
-        if usu.get("usuario") == cookie_usuario:
-            if usu.get("admin") == True:
-                return send_from_directory('privado', path)
-            return erro_html( "Usuario não tem permissao para acessar essa pagina" )
-    return erro_html( "Usuario não foi encontrado" )
+    # verifica se foi encontrado um usuario
+    if usu == None:
+        template = render_template( "erro.html", status=404, descricao="Usuário Não Encontrado" )
+        resposta = make_response( template )
+        resposta.status_code = 404
 
-#! Realiza login
-'''
-    Abre um arquivo json com todos os usuarios
-    visualiza entre todos eles qual tem o mesmo nome
-    de usuario enviado pela pagina
+    # verifica se o usuario encontrado e um administrador
+    elif usu.get("admin") == False:
+        template = render_template( "erro.html", status=401, descricao="Usuario não tem permissao para acessar essa pagina" )
+        resposta = make_response( template )
+        resposta.status_code = 401
 
-    caso nao encontre retorna o erro:
-    #! Usuario nao Encontrado
+    # retorna a pagina requerida
+    else:
+        resposta = send_from_directory( "admin", path )
 
-    depois verifica se a senha enviada pela pagina
-    condiz com a do usuario selecionado
+    return resposta
 
-    caso sejam diferentes, retorna o erro:
-    #! Senha Incorreta
-
-    Se for logado corretamente, a pagina sera
-    redirecionada para a rota '/livros'
-'''
+#! Autenticação do usuário
 @app.route( '/login', methods=["POST"] )
 def login():
-    for usu in abrir_arquivo( "data/usuario.json" ):
-        if usu.get("usuario") == request.form.get("usuario"):
+    # procura por um usuario com o mesmo nome do usuario na base de dados 'usuarios'
+    usu = arq_usuarios.encontrar_um( "usuario", request.form.get("usuario") )
 
-            if usu.get("senha") != request.form.get("senha"):
-                return erro_html( "Senha Incorreta" )
+    # verifica se foi encontrado um usuario
+    if usu == None:
+        template = render_template( "erro.html", status=404, descricao="Usuário Não Encontrado" )
+        resposta = make_response( template )
+        resposta.status_code = 404
 
-            resposta = redirect("/livros", code=301)
-            resposta.set_cookie( "nome_usuario", usu.get("usuario") )
-            return resposta
-    return erro_html( "Usuario não encontrado" )
+    # verifica se a senha enviada pelo form corresponde com a do usuario
+    elif usu.get("senha") != request.form.get("senha"):
+        template = render_template( "erro.html", status=403, descricao="Senha Incorreta" )
+        resposta = make_response( template )
+        resposta.status_code = 403
+
+    # caso esteja tudo certo, ele retorna uma resposta ...
+    # que redireciona para a pagina de livros ... e ...
+    # um cookie com o id do usuario autenticado
+    else:
+        resposta = redirect("/livros", code=302)
+        resposta.set_cookie( "usuario", usu.get("usuario") )
+
+    return resposta
 
 #! Realiza cadastro de novos usuarios
-'''
-	Pega o conteudo do arquivo de usuarios
-
-    cria um dicionario com as informaçoes do novo usuario
-		- usuario : puxado da pagina html
-        - senha : puxado da pagina html
-        - admin : puxado da pagina html
-        - agendamento : por padrao uma lista vazia
-
-    adiciona o novo usuario a lista de usuarios
-    reescreve o arquivo de usuarios
-    redireciona para a pagina de login
-'''
 @app.route( "/cadastre", methods=["POST"] )
 def cadastro():
-    usuarios = abrir_arquivo( "data/usuario.json" )
+    # Cria um novo objeto de usuario
     novo_usuario = {
-		"usuario": request.form.get("usuario"),
-		"senha": request.form.get("senha"),
-		"admin": request.form.get("admin") == "on",
+        "usuario": request.form.get("usuario"),
+        "senha": request.form.get("senha"),
+        "admin": False,
         "agendamento": []
-	}
-    usuarios.append( novo_usuario )
-    escrever_arquivo( "data/usuario.json", usuarios )
+    }
+
+    # Adiciona o usuario criado ao arquivo
+    arq_usuarios.adicionar( novo_usuario )
+    
+    # redireciona para a pagina de login
     return redirect( "/", code=302 )
 
 #! Sai do site e apaga os cookies
-'''
-    Cria uma resposta para redirecionar a pagina para o login
-    remove os cookies que identificam o usuario
-'''
 @app.route( "/sair", methods=["GET"] )
 def sair():
     resposta = redirect( "/", code=302 )
@@ -130,139 +99,100 @@ def sair():
     return resposta
 
 #! Retorna todos os livros
-'''
-	pega os dados dos cookies;
-    le o arquivo de usuarios
-
-    realiza um looping para verificar se os
-    dados dos cookies estao na lista de usuarios
-
-    #! Caso nao esteja retorna o erro "Usuario nao encontrado"
-
-    pega as informaçoes de procura do html
-    verifica se proc existe e nao e um texto vazio
-
-		#! Caso contrario retorna os dados de todos os livros
-
-		transforma os dados de procura em um texto minusculo
-        cria uma lista vazia
-
-        cria um loop para verificar aqueles dados dos livros
-		com titulo semelhantes aos dados de procura
-        e adiciona esses dados a lista vazia
-        
-        renderiza uma pagina html com os dados dos livro encontrados
-
-'''
 @app.route( "/livros", methods=["GET","POST"] )
-def get_livros():
-    cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "data/usuario.json" )
+def get_livros():    
+    usu = arq_usuarios.encontrar_um( "usuario", request.cookies.get("usuario") )
 
-    for usu in usuarios:
-        if usu.get("usuario") == cookie_usuario:
+    if not usu:
+        template = render_template( "erro.html", status=404, descricao="Usuário Não Encontrado" )
+        resposta = make_response( template )
+        resposta.status_code = 404
 
-            proc = request.form.get("proc")
+    else:
+        procura_data = request.form.get("proc")
 
-            if proc and proc != "":
-                proc = proc.lower()
-                data = []
-                for liv in abrir_arquivo( "data/livros.json" ):
-                    if proc in liv.get("titulo").lower() or proc in liv.get("autor").lower():
-                        data.append( liv )
-            else:
-                data = abrir_arquivo( "data/livros.json" )
+        if procura_data == None:
+            data = arq_livros.ler()
+        else:
+            data = arq_livros.encontrar_similares( ["titulo","autor"], procura_data )
 
-            return render_template( "get_livros.html", livros=data, adm=usu.get("admin") )
+        resposta = render_template( "get_livros.html", livros=data, adm=usu.get("admin") )
 
-    return erro_html( "Usuario não encontrado" )
+    return resposta
 
 #! Sistema de agendamento
 '''
-	pega o parametro chamado ID
+        pega o parametro chamado ID
 
-	pega os dados dos cookies
+        pega os dados dos cookies
     pega os dados do arquivo de usuarios
 
     faz um loop para verificar se o usuario existe
-		#! Caso contrario retorna o erro "Usuario nao encontrado
+                #! Caso contrario retorna o erro "Usuario nao encontrado
         
         pega o arquivo de livros
         faz um loop para encontrar aquele livro com o ID igual	
         ao parametro ID
         
         Quando encontrar inverte o valor de "disponivel"
-		
+                
         adiciona esse ID a lista de agendamentos do usuario
         atualiza o arquivo de usuarios
         atualiza a pagina
 '''
 @app.route( "/agendar/<int:id>", methods=["GET"] )
-def agendar( id ):
+def agendar( id:int ):
     cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "data/usuario.json" )
+    usuarios = arq_usuarios.ler()
 
     for usu in usuarios:
         if usu.get("usuario") == cookie_usuario:
 
-            livros = abrir_arquivo( "data/livros.json" )
+            livros = arq_livros.ler()
+
             for liv in livros:
                 if liv.get("id") == id:
-                    liv["disponivel"] = ( liv["disponivel"] == False )
+                    liv["disponivel"] = ( liv["disponivel"] == False )            
 
-            escrever_arquivo( "data/livros.json", livros )
+            arq_livros.escrever( livros )
 
             usu["agendamento"].append( id )
-            escrever_arquivo( "data/usuario.json", usuarios )
+            arq_usuarios.escrever( usuarios )
 
             return redirect( f"/livros/id/{id}", code=302 )
 
     return erro_html( "Usuario não encontrado" )
 
-#! Le cada livro
-'''
-	pega o parametro ID do livro
-    pega os dados dos cookies
-    pega o arquivo dos usuario
-
-    faz um loop para verificar se o usuario
-    dos cookies existe
-		#! Caso contrario retorna o erro "Usuario nao encontrado"
-
-        le o arquivo de livros
-        Encontra entre os livros aquele com o ID igual
-        ao parametro
-
-        encerra o loop
-        retorna uma pagina html com os dados do livro
-'''
+#! Procura livro por seu id
 @app.route( "/livros/id/<int:id>", methods=["GET"] )
-def get_livros_por_id( id ):
-    cookie_usuario = request.cookies.get("nome_usuario")
-    usuarios = abrir_arquivo( "data/usuario.json" )
+def get_livros_por_id( id:int ):  
 
-    for usu in usuarios:
-        if usu.get("usuario") == cookie_usuario:
+    # verifica se o usuario esta autenticado pelos cookies
+    if arq_usuarios.encontrar_um( "usuario", request.cookies.get("nome_usuario") ):
 
-            pre_data = abrir_arquivo( "data/livros.json" )
-            data = {}
-            for d in pre_data:
-                if d.get("id") == id:
-                    data = d
-                    break
+        # redireciona para a pagina inicial
+        template = render_template( "erro.html", status=404, descricao="Usuário Não Encontrado" )
+        resposta = make_response( template )
+        resposta.status_code = 404
 
-            return render_template( "unico_livro.html", livro=data )
+    else:
+        # procura um livro igual ao parametro id
+        data = arq_livros.encontrar_um( "id", id )
 
-    return redirect( "/login/index.html", code=301 )
+        # renderiza a pagina com os dados encontrador
+        template = render_template( "unico_livro.html", livro=data )
+        resposta = make_response( template )
+
+    return resposta
 
 #! Adicionar um unico livro
 '''
-	pega os dados dos cookies
+        pega os dados dos cookies
     pega o arquivo dos usuarios
 
     faz um loop para verificar se o usuario
     dos cookies existe
-		#! Caso contrario retorna o erro "Usuario nao encontrado"
+                #! Caso contrario retorna o erro "Usuario nao encontrado"
         
         verifica se o usuario encontrado e Administrador
         #! Caso contrario retorna o erro "Você não tem permissão para cadastrar livros"
@@ -270,12 +200,12 @@ def get_livros_por_id( id ):
         encontra o maior ID entre os livros
         
         cria um novo livro em forma de dicionario
-			- id : maior ID
+                        - id : maior ID
             - disponivel : True por padrao
             - titulo : dados do forms
             - autor : dados do forms
         
-		abre o arquivo de livros
+                abre o arquivo de livros
         adiciona o novo livro a lista de livros
         reescreve arquivo de livros
         
@@ -284,7 +214,7 @@ def get_livros_por_id( id ):
 @app.route( "/add-livro", methods=["POST"] )
 def add_livro():
     cookie_usuario = request.cookies.get("nome_usuario")
-    data = abrir_arquivo( "data/usuario.json" )
+    data = arq_usuarios.ler()
 
     for usu in data:
         if usu.get("usuario") == cookie_usuario :
@@ -292,9 +222,9 @@ def add_livro():
             if usu.get("admin") == False:
                 return erro_html( "Você não tem permissão para cadastrar livros" )
 
-			# encontrar o maior numero
+                        # encontrar o maior numero
             maior = -1
-            for d in abrir_arquivo( "data/livros.json" ):
+            for d in arq_livros.ler():
                 if d.get("id") > maior:
                     maior = d.get("id")
 
@@ -305,12 +235,10 @@ def add_livro():
                 "autor": request.form.get("autor")
             }
 
-            data = abrir_arquivo( "data/livros.json" )
-            data.append( novo_livro )
-            escrever_arquivo( "data/livros.json", data )
+            arq_livros.adicionar( novo_livro )
 
-    return redirect( "/livros", code=301 )
+    return redirect( "/livros", code=302 )
 
-# Roda toda a aplicaçao
+#! Roda toda a aplicaçao
 if __name__ == "__main__":
     app.run( host="0.0.0.0", port=3000, debug=True )
