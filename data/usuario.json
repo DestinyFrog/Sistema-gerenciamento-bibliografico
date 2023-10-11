@@ -1,16 +1,14 @@
 [
 	{
-		"id": "svzwsvjrk",
+		"id": "jhkawnmf",
 		"usuario": "Admin",
-		"senha": "tera",
-		"admin": true,
-		"agendamento": []
+		"senha": "teract",
+		"admin": true
 	},
 	{
-		"id": "uvqmqwvxu",
+		"id": "eicvymxh",
 		"usuario": "NaoAdmin",
-		"senha": "tera",
-		"admin": false,
-		"agendamento": []
+		"senha": "teract",
+		"admin": false
 	}
 ]

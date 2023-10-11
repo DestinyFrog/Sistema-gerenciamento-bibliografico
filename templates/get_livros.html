@@ -15,11 +15,7 @@
     <nav id="container-pesquisa">
         <h1>Biblioteca online</h1>
 
-        {% if adm == True %}
-            <a href="/privado/add_livro/index.html">Adicionar Livro</a>
-        {% else %}
-            <p style="color:red;">Você não ter permissão para adicionar livros</p>
-        {% endif %}
+        <a href="/privado/add_livro/index.html">Adicionar Livro</a>
 
         <form action="/livros" method="POST">
             <input id="nome_cad" name="proc" type="text" placeholder="Busque o livro desejado" />
@@ -40,8 +36,7 @@
             <tbody>
                 {% for livro in livros %}
                 <tr height="20px" onclick="location.href = '/livros/id/{{ livro.id }}'">
-                    <td><a href="/livros/id/{{livro.id}}">{{
-                            livro.titulo }}</a></td>
+                    <td><a href="/livros/id/{{livro.id}}">{{ livro.titulo }}</a></td>
                     <td>{{ livro.autor }}</td>
                     <td>{{ "✅" if livro.disponivel else "❌" }}</td>
                 </tr>

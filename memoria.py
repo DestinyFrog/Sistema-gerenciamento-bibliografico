@@ -19,6 +19,7 @@ class Arquivo:
 		data_arquivo = open( self.arquivo_caminho, "r" )
 		texto = data_arquivo.read()
 		data_arquivo.close()
+
 		data = json.loads( texto )
 		return data
 
@@ -27,6 +28,15 @@ class Arquivo:
 		data = self.ler()
 		data.append( add_data )
 		self.escrever( data )
+
+	# encontrar o maior ID
+	def maior_id( self ):
+		data = self.ler()
+		maior_id = data[0].get("id")
+		for d in data:
+			if d.get("id") > maior_id:
+				maior_id = d.get("id")
+		return maior_id
 
 	# encontrar um unico livro pelo valor exato de um atributo
 	def encontrar_um( self, chave:str, valor ):
@@ -59,3 +69,12 @@ class Arquivo:
 				if dado_tratado in chave_tratado:
 					valores.append( d )
 		return valores
+
+	def editar( self, chave_para_alterar:str, valor_para_alterar, valor_para_procurar, chave_para_procurar="id" ):
+		data = self.ler()
+		for d in data:
+			if d.get(chave_para_procurar) == valor_para_procurar:
+				d[ chave_para_alterar ] = valor_para_alterar
+				break
+
+		self.escrever( data )

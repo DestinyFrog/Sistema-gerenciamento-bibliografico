@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/global.css">
 	<style>
 		* {
-			color: red;
 			padding: 8px;
 		}
 
@@ -18,8 +17,9 @@
 		}
 
 		#descricao {
-			width: 360px;
-			text-wrap: wrap;
+			display: flex;
+			flex-direction: column;
+			list-style: none;
 		}
 	</style>
 </head>
@@ -27,7 +27,17 @@
 <body>
 	<h1>ERRO: {{ status }}</h1>
 	<hr/>
-	<p id="descricao">{{ descricao }}</p>
+	<ul id="descricao">
+		{% for i in descricao %}
+			<li>👉 {{ i }}</li>
+		{% endfor %}
+	</ul>
+
+	{% if redireciona %}
+		<a href="{{ redireciona }}">Voltar</a>
+	{% else %}
+		<a href="/">Voltar</a>
+	{% endif %}
 </body>
 
 </html>
