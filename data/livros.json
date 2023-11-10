@@ -1,1 +1,30 @@
-[{"id": 0, "disponivel": false, "titulo": "Voc\u00ea Ligou para Sam", "autor": "Dustin Thao"}, {"id": 1, "disponivel": false, "titulo": "Jantar Secreto", "autor": "Raphael Montes"}, {"id": 2, "disponivel": true, "titulo": "Morte no Nilo", "autor": "Agatha Christie"}, {"id": 3, "disponivel": false, "titulo": "Hist\u00f3ria de uma Alma", "autor": "Teresa de Lisieux"}, {"id": 4, "disponivel": true, "titulo": "A Elite", "autor": "Kiera Cass"}, {"id": 5, "disponivel": true, "titulo": "It a Coisa", "autor": "Stephen King"}, {"id": 6, "disponivel": false, "titulo": "Contos de Fadas dos Irm\u00e3os Grimm", "autor": "Irm\u00e3os Grimm"}, {"id": 7, "disponivel": true, "titulo": "Para N\u00e3o Desistir do Amor", "autor": "Matheus Rocha"}, {"id": 8, "disponivel": true, "titulo": "Minha Vida Fora de S\u00e9rie", "autor": "Paula Pimenta"}, {"id": 9, "disponivel": true, "titulo": "Cemit\u00e9rio Maldito", "autor": "Stephen King"}, {"id": 10, "disponivel": true, "titulo": "O \u00d3dio que Voc\u00ea Semeia", "autor": "Angie Thomas"}, {"id": 11, "disponivel": true, "titulo": "A Culpa \u00e9 das Estrelas", "autor": "John Green"}, {"id": 12, "disponivel": true, "titulo": "A Hip\u00f3tese do Amor", "autor": "Ali Hazelwood"}, {"id": 13, "disponivel": true, "titulo": "Di\u00e1rio de uma Ansiosa ou Como Parei de me Sabotar", "autor": "Beth Evans"}, {"id": 14, "disponivel": true, "titulo": "A Biblioteca da Meia Noite", "autor": "Matt Haig"}, {"id": 15, "disponivel": true, "titulo": "Tudo que meu Cora\u00e7\u00e3o Grita desde o Dia que voc\u00ea(o) Partiu", "autor": "Gabriela Freitas"}, {"id": 16, "disponivel": true, "titulo": "Given", "autor": "Natsuki Kizu"}, {"id": 17, "disponivel": true, "titulo": "Heartstopper", "autor": "Alice Oseman"}, {"id": 18, "disponivel": false, "titulo": "Jujutsu Kaisen", "autor": "Gege Akutami"}, {"id": 19, "disponivel": true, "titulo": "Os Dois Morrem no Final", "autor": "Adam Silvera"}, {"id": 20, "disponivel": true, "titulo": "O Azul daqui \u00e9 mais Azul", "autor": "Robbie Couch"}, {"id": 21, "disponivel": true, "titulo": "Coraline", "autor": "Neil Gaiman"}, {"id": 21, "disponivel": true, "titulo": "O Conto de Aia", "autor": "Margaret Atwood"}, {"id": 21, "disponivel": true, "titulo": "O Conto de Aia", "autor": "Margaret Atwood"}, {"id": 21, "disponivel": true, "titulo": "O Conto de Aia", "autor": "Margaret Atwood"}, {"id": 21, "disponivel": true, "titulo": "1984", "autor": "George Orwell"}, {"id": 21, "disponivel": true, "titulo": "Bento", "autor": "Pascal"}, {"id": 21, "disponivel": true, "titulo": "1984", "autor": "George Orwell"}]
+[
+    {
+        "id": 1,
+        "disponivel": true,
+        "titulo": "Morte no Nilo",
+        "autor": "Agatha Christie",
+        "imagem": "https://img.skoob.com.br/iws2HpPSxgFrj4IMYMTj9knq92M=/600x0/center/top/filters:format(jpeg)/https://skoob.s3.amazonaws.com/livros/1202/A_MORTE_NO_NILO_1406301348B.jpg"
+    },
+    {
+        "id": 2,
+        "disponivel": true,
+        "titulo": "Coraline",
+        "autor": "Neil Gaiman",
+        "imagem": "https://m.media-amazon.com/images/I/81xQRYsOu6S._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "id": 3,
+        "disponivel": true,
+        "titulo": "O Conto de Aia",
+        "autor": "Margaret Atwood",
+        "imagem": "https://m.media-amazon.com/images/I/51louqeHO5L.jpg"
+    },
+    {
+        "id": 4,
+        "disponivel": true,
+        "titulo": "1984",
+        "autor": "George Orwell",
+        "imagem": "https://m.media-amazon.com/images/I/61Xdf3z7OpL.jpg"
+    }
+]

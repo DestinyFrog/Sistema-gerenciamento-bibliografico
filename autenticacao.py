@@ -13,19 +13,6 @@ class Autenticacao:
         letras = string.ascii_lowercase
         return ''.join(random.choice(letras) for _ in range( tamanho ))
 
-    def cadastrar_usuario( self, nome_usuario:str, senha:str ):
-        # Cria um novo objeto de usuario
-        novo_usuario = {
-            "id": self.gerar_ID(),
-            "usuario": nome_usuario,
-            "senha": senha,
-            "admin": False
-        }
-
-        # Adiciona o usuario criado ao arquivo
-        self.base.adicionar( novo_usuario )
-        return None
-
     def autenticar( self, req, login=False, adm=False ):
         # procura por um usuario com o mesmo nome do usuario na base de dados 'usuarios'
         
