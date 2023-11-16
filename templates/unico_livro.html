@@ -10,32 +10,18 @@
 </head>
 
 <body>
-    <a href="/get_livros/index.html" id="sair">Sair</a>
+    <a href="/get_livros/index.html" id="sair">Voltar</a>
 
-    <nav id="container-pesquisa">
-        <h1>Biblioteca online</h1>
+	<img width="200px" src="{{ livro.imagem }}" alt="capa {{ livro.titulo }}">
 
-        <form action="/livros" method="POST">
-            <input id="nome_cad" name="proc" type="text" placeholder="Busque o livro desejado" />
-            <input type="submit" value="Procurar" id="button">
-        </form>
-    </nav>
+	<h1>{{ livro.titulo }} - {{ livro.autor }}</h1>
 
-    <nav id="container-unico-livro">
-        <section>
-
-            <h1>{{ livro.titulo }} - {{ livro.autor }}</h1>
-
-            {% if livro.disponivel %}
-				<h3 style="color:greenyellow;">Disponível para Empréstimo</h3>
-                <a href="/agendar/{{ livro.id }}" id="botao-agendar">Agendar empréstimo</a>
-			{% else %}
-				<h3 style="color:crimson;">Não disponível para Empréstimo</h3>
-            {% endif %}
-
-        </section>
-
-    </nav>
+	{% if livro.disponivel %}
+		<h3 style="color:greenyellow;">Disponível para Empréstimo</h3>
+		<a href="/agendar/{{ livro.id }}" id="botao-agendar">Agendar empréstimo</a>
+	{% else %}
+		<h3 style="color:crimson;">Não disponível para Empréstimo</h3>
+	{% endif %}
 </body>
 
 </html>

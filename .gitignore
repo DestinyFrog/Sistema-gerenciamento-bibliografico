@@ -1,2 +1,5 @@
 env
 __pycache__
+setup.sh
+data/liv.json
+notas

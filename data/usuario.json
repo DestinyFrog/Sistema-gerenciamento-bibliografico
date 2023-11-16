@@ -10,5 +10,17 @@
 		"usuario": "NaoAdmin",
 		"senha": "teract",
 		"admin": false
+	},
+	{
+		"id": "uuuuuuuu",
+		"usuario": "AqueleQuePermanece",
+		"senha": "tempo",
+		"admin": true
+	},
+	{
+		"id": "uuuuuuuu",
+		"usuario": "ODoutor",
+		"senha": "tempo",
+		"admin": true
 	}
 ]

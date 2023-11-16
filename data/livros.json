@@ -1,30 +1,37 @@
 [
-    {
+	{
         "id": 1,
-        "disponivel": true,
-        "titulo": "Morte no Nilo",
-        "autor": "Agatha Christie",
-        "imagem": "https://img.skoob.com.br/iws2HpPSxgFrj4IMYMTj9knq92M=/600x0/center/top/filters:format(jpeg)/https://skoob.s3.amazonaws.com/livros/1202/A_MORTE_NO_NILO_1406301348B.jpg"
-    },
-    {
-        "id": 2,
-        "disponivel": true,
-        "titulo": "Coraline",
-        "autor": "Neil Gaiman",
-        "imagem": "https://m.media-amazon.com/images/I/81xQRYsOu6S._AC_UF1000,1000_QL80_.jpg"
-    },
-    {
-        "id": 3,
-        "disponivel": true,
-        "titulo": "O Conto de Aia",
-        "autor": "Margaret Atwood",
-        "imagem": "https://m.media-amazon.com/images/I/51louqeHO5L.jpg"
-    },
-    {
-        "id": 4,
         "disponivel": true,
         "titulo": "1984",
         "autor": "George Orwell",
-        "imagem": "https://m.media-amazon.com/images/I/61Xdf3z7OpL.jpg"
+        "imagem": "/img/capa/1984.jpeg"
+    },
+	{
+        "id": 2,
+        "disponivel": true,
+        "titulo": "Dom Casmurro",
+        "autor": "Machado de Assis",
+        "imagem": "/img/capa/dom_casmurro.jpeg"
+    },
+	{
+        "id": 3,
+        "disponivel": true,
+        "titulo": "Farenheit 451",
+        "autor": "Ray Bradbury",
+        "imagem": "/img/capa/farenheit_451.jpeg"
+    },
+	{
+        "id": 4,
+        "disponivel": true,
+        "titulo": "O Cortiço",
+        "autor": "Aluísio Azevedo",
+        "imagem": "/img/capa/o_cortico.jpeg"
+    },
+	{
+        "id": 5,
+        "disponivel": true,
+        "titulo": "O Pequeno Príncipe",
+        "autor": "Antoine de Saint-Exupéry",
+        "imagem": "/img/capa/o_pequeno_principe.jpeg"
     }
 ]
