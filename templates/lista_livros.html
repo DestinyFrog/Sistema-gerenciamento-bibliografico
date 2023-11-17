@@ -1,8 +1,0 @@
-{% for livro in livros %}
-<div class="card" onclick="location.href = '/livros/id/{{ livro.id }}'">
-    <img src="{{ livro.imagem }}" alt="capa {{ livro.titulo }}">
-    <p><a href="/livros/id/{{livro.id}}">{{ livro.titulo }}</a></p>
-    <p>{{ livro.autor }}</p>
-    <p>{{ "✅" if livro.disponivel else "❌" }}</p>
-</div>
-{% endfor %}

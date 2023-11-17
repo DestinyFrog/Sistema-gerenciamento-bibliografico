@@ -1,37 +1,37 @@
 [
 	{
-        "id": 1,
-        "disponivel": true,
-        "titulo": "1984",
-        "autor": "George Orwell",
-        "imagem": "/img/capa/1984.jpeg"
-    },
+		"id": 1,
+		"disponivel": true,
+		"titulo": "1984",
+		"autor": "George Orwell",
+		"imagem": "/img/capa/1984.jpeg"
+	},
 	{
-        "id": 2,
-        "disponivel": true,
-        "titulo": "Dom Casmurro",
-        "autor": "Machado de Assis",
-        "imagem": "/img/capa/dom_casmurro.jpeg"
-    },
+		"id": 2,
+		"disponivel": true,
+		"titulo": "Dom Casmurro",
+		"autor": "Machado de Assis",
+		"imagem": "/img/capa/dom_casmurro.jpeg"
+	},
 	{
-        "id": 3,
-        "disponivel": true,
-        "titulo": "Farenheit 451",
-        "autor": "Ray Bradbury",
-        "imagem": "/img/capa/farenheit_451.jpeg"
-    },
+		"id": 3,
+		"disponivel": true,
+		"titulo": "Farenheit 451",
+		"autor": "Ray Bradbury",
+		"imagem": "/img/capa/farenheit_451.jpeg"
+	},
 	{
-        "id": 4,
-        "disponivel": true,
-        "titulo": "O Cortiço",
-        "autor": "Aluísio Azevedo",
-        "imagem": "/img/capa/o_cortico.jpeg"
-    },
+		"id": 4,
+		"disponivel": true,
+		"titulo": "O Cortiço",
+		"autor": "Aluísio Azevedo",
+		"imagem": "/img/capa/o_cortico.jpeg"
+	},
 	{
-        "id": 5,
-        "disponivel": true,
-        "titulo": "O Pequeno Príncipe",
-        "autor": "Antoine de Saint-Exupéry",
-        "imagem": "/img/capa/o_pequeno_principe.jpeg"
-    }
+		"id": 5,
+		"disponivel": true,
+		"titulo": "O Pequeno Príncipe",
+		"autor": "Antoine de Saint-Exupéry",
+		"imagem": "/img/capa/o_pequeno_principe.jpeg"
+	}
 ]

@@ -64,12 +64,6 @@ class Autenticacao:
 			self.passos.append("✅ Usuário Logado")
 
 		# Verifica se é administrador
-		if usuario.get("admin") == True:
-			self.passos.append("❌ Usuário Não é Administrador")
-			return self.pagina_erro()
-		else:
-			self.passos.append("✅ Usuário é Administrador")
-
-		return True
+		return usuario.get("admin")
 
 auth = Autenticacao()

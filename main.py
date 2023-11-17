@@ -1,6 +1,6 @@
 from flask import Flask, request, send_from_directory, redirect, make_response, render_template
 from memoria import Arquivo
-from aut import auth
+from autenticacao import auth
 
 arq_livros = Arquivo( "./data/livros.json" )
 
@@ -48,7 +48,7 @@ def login():
 	return auth.logar( request )
 
 #! Retorna todos os livros
-@app.route( "/todos-livros" )
+@app.route( "/livros" )
 def todos_livros():
 	# Checar Login
 	logado = auth.checar_login( request )
@@ -65,8 +65,8 @@ def todos_livros():
 	else:
 		data = arq_livros.encontrar_similares( ["titulo","autor"], procura_data )
 
-	template = render_template( "lista_livros.html", livros=data )
-	resposta = make_response( template )
+	# template = render_template( "lista_livros.html", livros=data )
+	resposta = make_response( data )
 	return resposta
 
 #! Procura livro por seu id
@@ -83,8 +83,8 @@ def livros_por_id( id:int ):
 	data = arq_livros.encontrar_um( "id", id )
 
 	# renderiza a pagina com os dados encontrador
-	template = render_template( "unico_livro.html", livro=data )
-	resposta = make_response( template )
+	# template = render_template( "unico_livro.html", livro=data )
+	resposta = make_response( data )
 	return resposta
 
 #! Roda toda a aplicaçao
