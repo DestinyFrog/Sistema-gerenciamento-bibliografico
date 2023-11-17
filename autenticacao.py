@@ -36,14 +36,14 @@ class Autenticacao:
 			self.passos.append("✅ Senha Correta")
 
 		resposta = redirect("/", code=302)
-		resposta.set_cookie( "usuario", usuario.get("id") )
+		resposta.set_cookie( "usuario", usuario.get("usuario") )
 		return resposta
 
 	def checar_login( self, req ):
 		self.passos = []
 
 		usuario_do_cookie = req.cookies.get("usuario")
-		usuario = self.base.encontrar_um( "id", usuario_do_cookie )
+		usuario = self.base.encontrar_um( "usuario", usuario_do_cookie )
 
 		if usuario == None:
 			self.passos.append("❌ Usuário Não Logado")

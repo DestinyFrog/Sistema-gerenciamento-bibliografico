@@ -1,25 +1,19 @@
 [
 	{
-		"id": "jhkawnmf",
+		"id": 1,
 		"usuario": "Admin",
 		"senha": "teract",
 		"admin": true
 	},
 	{
-		"id": "eicvymxh",
+		"id": 2,
 		"usuario": "NaoAdmin",
 		"senha": "teract",
 		"admin": false
 	},
 	{
-		"id": "uuuuuuuu",
+		"id": 3,
 		"usuario": "AqueleQuePermanece",
-		"senha": "tempo",
-		"admin": true
-	},
-	{
-		"id": "uuuuuuuu",
-		"usuario": "ODoutor",
 		"senha": "tempo",
 		"admin": true
 	}

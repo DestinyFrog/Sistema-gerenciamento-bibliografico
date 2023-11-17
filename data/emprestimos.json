@@ -1,0 +1,11 @@
+[
+	{
+		"usuario": 2,
+		"livro": 1,
+		"data_de_emprestimo": "16/11/2023",
+		"data_de_devolucao": [
+			"20/11/2023",
+			"24/11/2023"
+		]
+	}
+]
