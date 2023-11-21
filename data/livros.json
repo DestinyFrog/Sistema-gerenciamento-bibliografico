@@ -1,37 +1,75 @@
 [
 	{
-		"id": 1,
-		"disponivel": true,
-		"titulo": "1984",
-		"autor": "George Orwell",
-		"imagem": "/img/capa/1984.jpeg"
+	  "autor": "George Orwell",
+	  "generos": [
+		"Literatura Inglesa",
+		"Distopia",
+		"Fic\u00e7\u00e3o Cient\u00edfica"
+	  ],
+	  "id": 1,
+	  "imagem": "https://m.media-amazon.com/images/I/819js3EQwbL._AC_UF1000,1000_QL80_.jpg",
+	  "titulo": "1984"
 	},
 	{
-		"id": 2,
-		"disponivel": true,
-		"titulo": "Dom Casmurro",
-		"autor": "Machado de Assis",
-		"imagem": "/img/capa/dom_casmurro.jpeg"
+	  "autor": "Machado de Assis",
+	  "generos": [
+		"Literatura Brasileira",
+		"Romance",
+		"Realismo"
+	  ],
+	  "id": 2,
+	  "imagem": "https://m.media-amazon.com/images/I/61x1ZHomWUL._AC_UF1000,1000_QL80_.jpg",
+	  "titulo": "Dom Casmurro"
 	},
 	{
-		"id": 3,
-		"disponivel": true,
-		"titulo": "Farenheit 451",
-		"autor": "Ray Bradbury",
-		"imagem": "/img/capa/farenheit_451.jpeg"
+	  "autor": "Alu\u00edsio Azevedo",
+	  "generos": [
+		"Literatura Brasileira",
+		"Romance",
+		"Naturalismo"
+	  ],
+	  "id": 4,
+	  "imagem": "https://img.skoob.com.br/LPyaamacdpheexqceQg7tnuSJ-U=/600x0/center/top/filters:format(jpeg)/https://skoob.s3.amazonaws.com/livros/975/O_CORTICO_1383203732B.jpg",
+	  "titulo": "O Corti\u00e7o"
 	},
 	{
-		"id": 4,
-		"disponivel": true,
-		"titulo": "O Cortiço",
-		"autor": "Aluísio Azevedo",
-		"imagem": "/img/capa/o_cortico.jpeg"
+	  "autor": "Frank Herbert",
+	  "generos": [
+		"Literatura Americana",
+		"Distopia",
+		"Literatura Extrangeira",
+		"Romance",
+		"Fic\u00e7\u00e3o Cient\u00edfica",
+		"Aventura"
+	  ],
+	  "id": 6,
+	  "imagem": "https://img.wook.pt/images/duna-frank-herbert/MXwyNDQ1NzQzOHwyMDU0Njc4MnwxNjA0NTAwMjcyMDAw/500x",
+	  "titulo": "Duna"
 	},
 	{
-		"id": 5,
-		"disponivel": true,
-		"titulo": "O Pequeno Príncipe",
-		"autor": "Antoine de Saint-Exupéry",
-		"imagem": "/img/capa/o_pequeno_principe.jpeg"
+	  "autor": "Machado de Assis",
+	  "generos": [
+		"Literatura Brasileira",
+		"Romance",
+		"Realismo Brasileiro",
+		"Cl\u00e1ssicos da Literatura Brasileira",
+		"Fic\u00e7\u00e3o"
+	  ],
+	  "id": 7,
+	  "imagem": "https://m.media-amazon.com/images/I/51KTqmlBwEL.jpg",
+	  "titulo": "Mem\u00f3rias P\u00f3stumas de Br\u00e1s Cubas"
+	},
+	{
+	  "autor": "Lu\u00eds de Cam\u00f5es",
+	  "generos": [
+		"Literatura Portuguesa",
+		"Poesia",
+		"Epopeia",
+		"Classicismo"
+	  ],
+	  "id": 10,
+	  "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Os_Lus%C3%ADadas.jpg/230px-Os_Lus%C3%ADadas.jpg",
+	  "titulo": "Os Lus\u00edadas"
 	}
-]
+  ]
+  

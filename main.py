@@ -1,8 +1,11 @@
 from flask import Flask, request, send_from_directory, redirect, make_response, render_template
 from memoria import Arquivo
-from autenticacao import auth
+from autenticacao import Autenticacao
+from eventos import Eventos
 
 arq_livros = Arquivo( "./data/livros.json" )
+auth = Autenticacao()
+empres = Eventos( arq_livros, auth )
 
 app = Flask(__name__)
 
@@ -41,7 +44,16 @@ def sair():
 	resposta.delete_cookie( "usuario" )
 	return resposta
 
-# #! Autenticação do usuário
+#! Verifica Admin
+@app.route('/souadmin')
+def souadmin():
+	logado = auth.checar_admin( request )
+	if logado != True:
+		return logado
+	else:
+		return ""
+
+#! Autenticação do usuário
 @app.route( '/logar', methods=["POST","GET"] )
 def login():
 	# Realizar login
@@ -63,9 +75,11 @@ def todos_livros():
 	if procura_data == None:
 		data = arq_livros.ler()
 	else:
-		data = arq_livros.encontrar_similares( ["titulo","autor"], procura_data )
+		data = arq_livros.encontrar_similares( ["titulo","autor","generos"], procura_data )
 
-	# template = render_template( "lista_livros.html", livros=data )
+	for d in data:
+		empres.encontrar_por_livro( d )
+
 	resposta = make_response( data )
 	return resposta
 
@@ -81,11 +95,152 @@ def livros_por_id( id:int ):
 
 	# procura um livro igual ao parametro id
 	data = arq_livros.encontrar_um( "id", id )
+	empres.encontrar_por_livro( data )
 
 	# renderiza a pagina com os dados encontrador
-	# template = render_template( "unico_livro.html", livro=data )
 	resposta = make_response( data )
 	return resposta
 
+#! Adiciona um dos livros
+@app.route( "/novo_livro" )
+def adicionar_livro():
+	logado = auth.checar_admin( request )
+	if logado != True:
+		return logado
+
+	titulo = request.args.get("titulo")
+	autor = request.args.get("autor")
+	imagem = request.args.get("imagem")
+	generos = request.args.get("generos").split("|")
+
+	novo_livro = {
+		"titulo": titulo,
+		"autor": autor,
+		"imagem": imagem,
+		"generos": generos
+	}
+
+	arq_livros.adicionar( novo_livro )
+	return redirect( "/", code=302 )
+
+#! Remove um dos livros
+@app.route( "/remover_livro" )
+def remover_livro():
+	logado = auth.checar_admin( request )
+	if logado != True:
+		return logado
+
+	id = int( request.args.get("id") )
+	arq_livros.remover( id )
+
+	return redirect( "/admin/livros/index.html", code=302 )
+
+# ! Edita informações de um livro
+@app.route( "/editar_livro" )
+def editar_livro():
+	logado = auth.checar_admin( request )
+	if logado != True:
+		return logado
+
+	id = int( request.args.get("id") )
+	titulo = request.args.get("titulo")
+	autor = request.args.get("autor")
+	imagem = request.args.get("imagem")
+	generos = request.args.get("generos").split("\n")
+
+	arq_livros.editar( "titulo", titulo, id )
+	arq_livros.editar( "autor", autor, id )
+	arq_livros.editar( "imagem", imagem, id )
+	arq_livros.editar( "generos", generos, id )
+
+	return redirect( "/admin/livros/index.html", code=302 )
+
+#! Lista os usuarios
+@app.route( "/usuarios" )
+def todos_usuarios():
+	logado = auth.checar_admin( request )
+	if logado != True:
+		return logado
+
+	# Procura pelo livro requisitado
+	procura_data = request.args.get("proc")
+
+	if procura_data == None:
+		data = auth.base.ler()
+	else:
+		data = auth.base.encontrar_similares( ["usuario"], procura_data )
+
+	resposta = make_response( data )
+	return resposta
+
+#! Adiciona um dos usuarios
+@app.route( "/novo_usuario" )
+def adicionar_usuario():
+	logado = auth.checar_admin( request )
+	if logado != True:
+		return logado
+
+	usuario = request.args.get("usuario")
+	senha = request.args.get("senha")
+	admin = request.args.get("admin")
+
+	novo_usuario = {
+		"usuario": usuario,
+		"senha": senha,
+		"admin": admin
+	}
+
+	auth.base.adicionar( novo_usuario )
+	return redirect( "/", code=302 )
+
+#! Retorna todos os eventos
+@app.route( "/eventos" )
+def todos_eventos():
+	logado = auth.checar_login( request )
+	if logado != True:
+		return logado
+
+	data = empres.ler()
+
+	resposta = make_response( data )
+	return resposta
+
+#! Adiciona agendamentos
+@app.route( "/agendar/<int:id>" )
+def adicionar_agendamentos( id ):
+	# Checar Login
+	logado = auth.checar_login( request )
+
+	# Retorna erro se nao logado
+	if logado != True:
+		return logado
+
+	usuario_nome = request.cookies.get("usuario")
+	usu = auth.base.encontrar_um( "usuario", usuario_nome )
+	empres.agendar_emprestimo( id, usu.get("id") )
+
+	return redirect( "/", code=302 )
+
+#! Adiciona emprestimos
+@app.route( "/emprestimo/<int:id>" )
+def emprestar( id ):
+	logado = auth.checar_admin( request )
+	if logado != True:
+		return logado
+
+	empres.realizar_emprestimo( id )
+	return redirect( "/", code=302 )
+
+#! Adiciona emprestimos
+@app.route( "/devolucao/<int:id>" )
+def devolver( id ):
+	logado = auth.checar_admin( request )
+	if logado != True:
+		return logado
+
+	empres.excluir_evento( id )
+	return redirect( "/", code=302 )
+
 #! Roda toda a aplicaçao
-app.run( host="0.0.0.0", port=3000, debug=True )
+if __name__ == "__main__":
+	app.run( host="0.0.0.0", port=3000, debug=True )

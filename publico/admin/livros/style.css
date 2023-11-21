@@ -1,0 +1,22 @@
+
+
+table {
+	width: 100vw;
+}
+
+ul {
+	padding-left: 14px;
+}
+
+th, td {
+	border-bottom: 1px solid black;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+#editar-box {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+}

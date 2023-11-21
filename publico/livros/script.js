@@ -27,13 +27,26 @@ async function procurar() {
 
 function adicionarLivros( data ) {
 	main.innerHTML = ""
-	data.forEach( ({id,imagem,titulo,autor,disponivel}) => {
+	data.forEach( (d) => {
+		var emoji = "🟢"
+
+		switch ( d.status ) {
+			case "agendado":
+			case "emprestado":
+				emoji = "🔴"
+				break
+			case "indisponível":
+				emoji = "⚪"
+				break
+		}
+
 		const content = `
 			<div class="card">
-				<img src="${imagem}" alt="capa ${titulo}">
-				<p><a href="/uni_livro/index.html?${id}">${titulo}</a></p>
-				<p>${autor}</p>
-				<p>${disponivel  ? '✅' : '❌'}</p>
+				<figure>
+					<img onclick="window.location.href='/uni_livro/index.html?${d.id}'" src="${d.imagem}" alt="capa ${d.titulo}">
+					<figcaption>${emoji} ${d.status}</figcaption>
+				</figure>
+				<p>${d.titulo} - <i>${d.autor}</i></p>
 			</div>`
 
 		main.innerHTML += content

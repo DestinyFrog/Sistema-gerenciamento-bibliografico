@@ -55,7 +55,7 @@ class Autenticacao:
 		self.passos = []
 
 		usuario_do_cookie = req.cookies.get("usuario")
-		usuario = self.base.encontrar_um( "id", usuario_do_cookie )
+		usuario = self.base.encontrar_um( "usuario", usuario_do_cookie )
 
 		if usuario == None:
 			self.passos.append("❌ Usuário Não Logado")
@@ -64,6 +64,10 @@ class Autenticacao:
 			self.passos.append("✅ Usuário Logado")
 
 		# Verifica se é administrador
-		return usuario.get("admin")
+		if usuario.get("admin") != True:
+			self.passos.append("❌ Usuário Não é Administrador")
+			return self.pagina_erro()
+		else:
+			self.passos.append("✅ Usuário é Administrador")
 
-auth = Autenticacao()
+		return True

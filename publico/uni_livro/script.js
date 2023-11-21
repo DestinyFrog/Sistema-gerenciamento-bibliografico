@@ -15,6 +15,14 @@ async function carregar_livro() {
 		<img width="200px" src="${data.imagem}" alt="capa ${data.titulo}">
 		<h1>${data.titulo} - ${data.autor}</h1>`
 
+		console.log( data.status )
+
+		if ( data.status == "disponível" ) {
+			main.innerHTML += `<a href="/agendar/${data.id}">Agendar Emprestimo</a>`
+		} else {
+			main.innerHTML += `<p>${ data.status }</p>`
+		}
+
 		document.querySelector("title").textContent = data.titulo
 	} catch {
 		document.body.innerHTML = txt

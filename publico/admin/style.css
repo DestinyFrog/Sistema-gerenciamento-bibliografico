@@ -1,23 +1,16 @@
 
 body {
-	max-width: 100vw;
-	max-height: 100vh;
+	width: 100vw;
+	height: 100vh;
 }
 
 main {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	height: 100%;
+	grid-template-rows: 1fr 1fr;
 }
 
-.card {
-	display: grid;
-	grid-template-columns: 1fr 8fr 8fr 1fr;
-
-	border-bottom: 1px solid black;
-
-	max-height: 50px;
-}
-
-.card img {
-	max-width: 100%;
+td {
+	border: 1px solid black;
+	padding: 3px;
 }

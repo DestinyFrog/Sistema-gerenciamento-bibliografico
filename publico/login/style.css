@@ -13,7 +13,8 @@ body {
     min-height: 100vh;
     min-width: 100vw;
 
-    background-image: url("https://i.pinimg.com/originals/26/e8/a5/26e8a502f115b13670b37990f7fe539b.gif");
+    /* background-image: url("https://i.pinimg.com/originals/26/e8/a5/26e8a502f115b13670b37990f7fe539b.gif"); */
+	background-color: crimson;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 50%;
