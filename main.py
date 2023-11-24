@@ -193,6 +193,36 @@ def adicionar_usuario():
 	auth.base.adicionar( novo_usuario )
 	return redirect( "/", code=302 )
 
+#! Remove um dos usuarios
+@app.route( "/remover_usuario" )
+def remover_usuario():
+	logado = auth.checar_admin( request )
+	if logado != True:
+		return logado
+
+	id = int( request.args.get("id") )
+	auth.base.remover( id )
+
+	return redirect( "/admin/usuarios/index.html", code=302 )
+
+# ! Edita informações de um livro
+@app.route( "/editar_usuario" )
+def editar_usuario():
+	logado = auth.checar_admin( request )
+	if logado != True:
+		return logado
+
+	id = int( request.args.get("id") )
+	usuario = request.args.get("usuario")
+	senha = request.args.get("senha")
+	admin = request.args.get("admin")
+
+	auth.base.editar( "usuario", usuario, id )
+	auth.base.editar( "senha", senha, id )
+	auth.base.editar( "admin", admin, id )
+
+	return redirect( "/admin/usuarios/index.html", code=302 )
+
 #! Retorna todos os eventos
 @app.route( "/eventos" )
 def todos_eventos():

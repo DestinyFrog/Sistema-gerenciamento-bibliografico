@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Olá Administrador</title>
+	<link rel="favicon" type="image/x-icon" href="#">
+	<link rel="stylesheet" href="/global.css">
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+	<a href="/sair" id="sair">Sair</a>
+
+	<header>
+		<h1 id="logo">SideLook</h1>
+		<nav>
+			<a href="/livros/index.html">Livros</a>
+			<a href="/admin/index.html">Pagina Admin</a>
+			<a>Controle de Usuários</a>
+			<a href="/admin/livros/index.html">Controle de Livros</a>
+		</nav>
+	</header>
+
+	<dialog id="editar-box">
+		<form method="GET" action="/editar_usuario">
+			<input type="hidden" id="inp_id" name="id">
+
+			<div>
+				<label for="inp_usuario">Usuário: </label>
+				<input type="text" name="titulo" id="inp_usuario">
+			</div>
+
+			<div>
+				<label for="inp_senha">Senha: </label>
+				<input type="text" name="autor" id="inp_senha">
+			</div>
+
+			<div>
+				<label for="inp_admin">Administrador ? </label>
+				<input type="checkbox" name="autor" id="inp_admin">
+			</div>
+
+			<div>
+				<a onclick="editar_dialog.close()">Cancelar</a>
+				<input type="submit" value="Salvar">
+			</div>
+		</form>
+	</dialog>
+
+	<main>
+		<section id="lista-livros-box">
+			<div id="inp-procura-box">
+				<img width="20px" src="/img/lupa.svg" alt="icone-pesquisa">
+				<input type="text" id="inp-procura" placeholder="...">
+			</div>
+
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Usuário</th>
+						<th>Senha</th>
+						<th>ADM?</th>
+						<th colspan="2">Ações</th>
+					</tr>
+				</thead>
+
+				<tbody id="lista-livros"></tbody>
+			</table>
+		</section>
+	</main>
+
+	<script src="./script.js"></script>
+</body>
+
+</html>
