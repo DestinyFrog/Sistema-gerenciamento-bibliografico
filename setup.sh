@@ -3,5 +3,5 @@
 apt update
 apt upgrade
 apt install python3-pip
-pip3 -r requirements.txt
+pip3 install -r requirements.txt
 python3 main.py
