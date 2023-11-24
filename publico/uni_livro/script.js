@@ -11,19 +11,18 @@ async function carregar_livro() {
 	try {
 		const data = JSON.parse( txt )
 
-		main.innerHTML += `
-		<img width="200px" src="${data.imagem}" alt="capa ${data.titulo}">
-		<h1>${data.titulo} - ${data.autor}</h1>`
-
-		console.log( data.status )
+        document.getElementById("in_titulo").innerText = data.titulo
+        document.getElementById("in_autor").innerText = data.autor
+        document.getElementById("in_autor").innerText = data.autor        
+        document.getElementById("in_imagem").src = data.imagem
 
 		if ( data.status == "disponível" ) {
-			main.innerHTML += `<a href="/agendar/${data.id}">Agendar Emprestimo</a>`
+			// main.innerHTML += `<a href="/agendar/${data.id}">Agendar Emprestimo</a>`
 		} else {
-			main.innerHTML += `<p>${ data.status }</p>`
+			// main.innerHTML += `<p>${ data.status }</p>`
 		}
 
-		document.querySelector("title").textContent = data.titulo
+		document.querySelector("title").textContent = `Livro - ${data.titulo}`
 	} catch {
 		document.body.innerHTML = txt
 	}

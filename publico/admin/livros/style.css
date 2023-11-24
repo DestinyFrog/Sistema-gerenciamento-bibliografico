@@ -12,6 +12,7 @@ th, td {
 	border-bottom: 1px solid black;
 	padding-left: 4px;
 	padding-right: 4px;
+	width: auto;
 }
 
 #editar-box {
@@ -19,4 +20,25 @@ th, td {
 	top: 50%;
 	left: 50%;
 	transform: translate( -50%, -50% );
+}
+
+.capa {
+	width: 50px;
+	height: 80px;
+
+	object-fit: contain;
+}
+
+#inp-procura-box {
+	border: 2px solid black;
+	display: flex;
+	
+	width: 100%;
+}
+
+#inp-procura {
+	width: 100%;
+	border: 0px;
+	padding: 5px;
+	outline: none;
 }

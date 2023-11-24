@@ -60,7 +60,7 @@ function desenharTabela() {
 	dados.forEach( (d,idx) => {
 		const el = `<tr>
 			<td>${d.id}</td>
-			<td><img height="80" src="${d.imagem}" alt="capa ${d.titulo}"></td>
+			<td><img class="capa" src="${d.imagem}" alt="capa ${d.titulo}"></td>
 			<td>${d.titulo}</td>
 			<td>${d.autor}</td>
 			<td>

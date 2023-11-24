@@ -1,38 +1,40 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-
-	<link rel="stylesheet" href="/global.css">
+    <link rel="favicon" type="image/x-icon" href="#">
+    <link rel="stylesheet" href="/global.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
+    <div id="particles-js"></div>
     <main>
+        <form action="/logar" method="POST" id="container">
+            <img id="slogan"
+                src="https://cursostecnicostocantins.com.br/wp-content/uploads/2022/11/Logotipo-SENAI-Slogan-Negativa-1-300x112.png">
 
-        <h1 id="titulo">Login</h1>
-    
-        <form action="/logar" method="POST">
+            <label for="name">
+                <span>Nome:</span>
+                <input id="nome_cad" name="usuario" required="required" type="text" placeholder="Nome" />
+            </label>
 
-            <div id="container">
-
-                <label for="nome_inp">Nome:</label>
-                <input id="nome_inp" name="usuario" required="required" type="text" placeholder="Nome" />
-
-                <label for="senha_inp">Senha:</label>
-                <input id="senha_inp" name="senha" required="required" type="password" placeholder="ex. 1234" />
-                
-            </div>
+            <label for="password">
+                <span>Senha:</span>
+                <input id="senha_cad" name="senha" required="required" type="password" placeholder="ex. 1234" />
+            </label>
 
             <input type="submit" value="Entrar" id="button">
-        
         </form>
 
-        <p class="link">Não tem conta? <a href="/cadastro/index.html">Cadastre-se</a></p>
-
+        <div id="img-library"></div>
     </main>
+
+    <script src="./node_modules/particles.js/particles.js"></script>
+    <script src="./node_modules/particles.js/demo/js/app.js"></script>
 </body>
 
 </html>

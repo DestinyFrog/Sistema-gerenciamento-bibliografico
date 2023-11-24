@@ -1,0 +1,178 @@
+@import url(https://fonts.googleapis.com/css2?family=League+Gothic&family=Roboto+Slab:wght@500&family=Young+Serif&display=swap);
+
+*{
+    font-family: Roboto Slab;
+    margin: 0;
+    
+}
+
+body {
+    background-color:#f5f2ed;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    border-radius: 2px;
+}
+
+#seta-esquerda {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 27rem;
+    margin-left: 3rem;
+    background: rgb(245, 232, 131);
+    color: rgb(69, 69, 69);
+    border-radius: 10px;
+    /* espaçamento entra as palavras e o inicio e tamanho de botão */
+    padding: 0.5rem;
+    cursor: pointer;
+    /* tempo da transição */
+    transition: 110ms;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* propriedades que a transição precisa ter */
+    transition-property: box-shadow, transform;
+    border: none;
+    
+}
+
+#seta-esquerda:hover, #seta-esquerda:focus #seta-esquerda:active {
+    box-shadow: 0 0 20px rgb(244, 244, 184);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+main {
+    background-color: #efe4d3;
+    /* width: 50%;
+    height: 50%; */
+    display: flex;
+    align-items: center;
+    
+    
+    
+}
+
+.lado-esquerdo {
+    display: flex;
+    font-size:small;
+    margin-right: 180px;
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.tema {
+    display: flex;
+    width: 0px;
+    padding: 2px;
+    flex-direction: top;
+    justify-content: start;
+    margin-bottom: 12rem;
+    margin-left: 5rem;
+    text-decoration:solid;
+}
+
+h3 {
+    display: flex;
+    margin-left: 0;
+}
+
+.container-thumb {
+    margin-left: 7rem;
+    display: flex;
+    background: rgb(245, 232, 131);;
+    width: 21.3rem;
+    height: 21rem;
+    border-radius: 50%; 
+    box-shadow: 10px 10px 4px rgba(10, 0, 0, 0.372)
+}
+
+/* css; capa do livro*/
+.thumb {
+    display: flex;
+    width: 0px;
+    margin-left: 4rem;
+    margin-bottom: 10px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.372)
+
+}
+
+/* flores */
+#ef-flores ef-flores1{
+    display: flex;  
+    width: 0px;
+    width: 123px;
+    margin-top: 10rem;
+    margin-left: 10px;
+    
+}
+
+.id-autor {
+    display: flex;
+    color: rgb(171, 171, 171);
+    margin-top: 1.3rem;
+    font-size: medium;
+    width: 0;
+    padding: 0;
+
+}
+
+.emprestimo {
+    display: flex;
+    color: #000000;
+    text-shadow: 1px 1px 1px #aed369b6;
+    margin-top: 7rem;
+    font-size: x-small;
+    width: 2px;
+}
+
+.bot-emp {
+    display: flex;
+    margin-top: 13.6rem;
+    background: rgb(245, 232, 131);
+    color: rgb(69, 69, 69);
+    border-radius: 12px;
+    /* espaçamento entra as palavras e o inicio e tamanho de botão */
+    padding: 0.5rem;
+    cursor: pointer;
+    /* tempo da transição */
+    transition: 110ms;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* propriedades que a transição precisa ter */
+    transition-property: box-shadow, transform;
+    border: none;
+}
+
+.bot-emp:hover, .bot-emp:focus .bot-emp:active {
+    box-shadow: 0 0 20px rgb(244, 244, 184);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.estrelas {
+    margin-bottom: 3.1rem;
+    width: 0;
+    display: flex;
+    flex-direction: row;
+}
+.estrelas input[type=radio] {
+    display: none;
+    content: '⭐';
+   
+  }
+  .estrelas label i.fa{
+    font-size: 16px;
+  }
+  .estrelas label i.fa:before {
+    content:'\f005';
+    color: rgb(237, 219, 145);
+  }
+  .estrelas input[type=radio]:checked ~ label i.fa:before {
+    color: #CCC;
+  }
+
+

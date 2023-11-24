@@ -11,7 +11,14 @@
 
 <body>
 	<a href="/sair" id="sair">Sair</a>
-	<a href="/admin/index.html">Pagina Admin</a>
+
+	<header>
+		<h1 id="logo">SideLook</h1>
+		<nav>
+			<a href="/livros/index.html">Livros</a>
+			<a href="/admin/index.html">Pagina Admin</a>
+		</nav>
+	</header>
 
 	<dialog id="editar-box">
 		<form method="GET" action="/editar_livro">
@@ -46,8 +53,10 @@
 
 	<main>
 		<section id="lista-livros-box">
-			<h1>Livros</h1>
-			<input type="text" id="inp-procura" placeholder="...">
+			<div id="inp-procura-box">
+				<img width="20px" src="/img/lupa.svg" alt="icone-pesquisa">
+				<input type="text" id="inp-procura" placeholder="...">
+			</div>
 
 			<table>
 				<thead>
