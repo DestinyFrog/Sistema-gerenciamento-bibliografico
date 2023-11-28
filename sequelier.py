@@ -79,7 +79,6 @@ class Sequelier():
 		for idx,i in enumerate(lista):
 			if i.get("id") == id:
 				lista.pop( idx )
-				return i
 
 	def conectar( self, lista1:list, lista2:list, cabo ):
 		nova_lista = self.copy( lista1 )

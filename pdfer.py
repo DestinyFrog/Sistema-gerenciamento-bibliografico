@@ -4,6 +4,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
+from datetime import date
 from fpdf import FPDF
 
 class PDFer:
@@ -34,15 +35,30 @@ class PDFer:
 		part.add_header('Content-Disposition', "attachment; filename= %s" % nomeArquivo )
 		msg.attach(part)
 
-	def ComprovanteAgendamento( self, livro, usuario ):
+	def ComprovanteAgendamento( self, livro, usuario, evento ):
 		pdf = FPDF()
 		pdf.add_page()
 		pdf.set_font('Arial', 'B', 16)
 
-		intro_livro = f"{livro.get('id')}. {livro.get('titulo')} - {livro.get('autor')}"
-		intro_usuario = f"{usuario.get('id')}. {usuario.get('usuario') } ({usuario.get('email')})"
+		intros = [
+			"SENAI - SP",
+			"Recibo de Agendamento",
+			f"Usuário:{usuario.get('id')} - {usuario.get('usuario')}",
+			"",
+			f"{livro.get('id')} - {livro.get('titulo')}",
+			# "Número de chamada: 821(81) A994c 2012/8.Ed.",
+			"",
+			"Normal",
+			f"Agendado em: { evento.get('data-inicial') }",
+			# f"Emprestado em: { evento.get('data-inicial') }",
+			# f"Devolver até: { evento.get('data-final') }",
+			# "Devolvido em: 08/11/2023 11:51:32",
+			f"{evento.get('id')}",
+			"",
+			f"Impresso em: { date.today().strftime('%d/%m/%Y') }",
+		]
 
-		[ pdf.cell(40, 10, txt, ln=1 ) for txt in [ intro_livro, intro_usuario ] ]
+		[ pdf.cell(40, 10, txt, ln=1 ) for txt in intros ]
 		pdf.output('doc.pdf', 'F')
 
 	def ComprovanteEmprestimo( self, livro, usuario, evento ):
@@ -51,9 +67,45 @@ class PDFer:
 		pdf.set_font('Arial', 'B', 16)
 
 		intros = [
-			f"{livro.get('id')}. {livro.get('titulo')} - {livro.get('autor')}",
-			f"{usuario.get('id')}. {usuario.get('usuario') } ({usuario.get('email')})",
-			f"{evento.get('data-inicial')} - {evento.get('data-final')}"
+			"SENAI - SP",
+			"Recibo de Empréstimo",
+			f"Usuário:{usuario.get('id')} - {usuario.get('usuario')}",
+			"",
+			f"{livro.get('id')} - {livro.get('titulo')}",
+			# "Número de chamada: 821(81) A994c 2012/8.Ed.",
+			"",
+			"Normal",
+			f"Emprestado em: { evento.get('data-inicial') }",
+			f"Devolver até: { evento.get('data-final') }",
+			# "Devolvido em: 08/11/2023 11:51:32",
+			f"{evento.get('id')}",
+			"",
+			f"Impresso em: { date.today().strftime('%d/%m/%Y') }",
+		]
+
+		[ pdf.cell(40, 10, txt, ln=1 ) for txt in intros ]
+		pdf.output('doc.pdf', 'F')
+
+	def ComprovanteDevolucao( self, livro, usuario, evento ):
+		pdf = FPDF()
+		pdf.add_page()
+		pdf.set_font('Arial', 'B', 16)
+
+		intros = [
+			"SENAI - SP",
+			"Recibo de Devolução",
+			f"Usuário:{usuario.get('id')} - {usuario.get('usuario')}",
+			"",
+			f"{livro.get('id')} - {livro.get('titulo')}",
+			# "Número de chamada: 821(81) A994c 2012/8.Ed.",
+			"",
+			"Normal",
+			f"Emprestado em: { evento.get('data-inicial') }",
+			f"Devolver até: { evento.get('data-final') }",
+			f"Devolvido em: { date.today().strftime('%d/%m/%Y') }",
+			f"{evento.get('id')}",
+			"",
+			f"Impresso em: { date.today().strftime('%d/%m/%Y') }",
 		]
 
 		[ pdf.cell(40, 10, txt, ln=1 ) for txt in intros ]

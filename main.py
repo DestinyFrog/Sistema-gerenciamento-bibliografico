@@ -293,13 +293,14 @@ def agendar():
 	novo_evento = {
 		"usuario": usuario.get("id"),
 		"livro": livro_id,
+		"data-inicial": date.today().strftime("%d/%m/%Y"),
 		"status": "agendado"
 	}
 
-	sequel.adicionar( l_eventos, novo_evento )
+	evento = sequel.adicionar( l_eventos, novo_evento )
 	livro = sequel.encontrar_um( l_livros, livro_id )
 
-	PDFer.ComprovanteAgendamento( livro, usuario )
+	PDFer.ComprovanteAgendamento( livro, usuario, evento )
 	email = PDFer.criarEmail( f"Agendamento do Livro - { livro.get('titulo') }", usuario.get("email"), f"Comprovante de Agendamento do Livro { livro.get('titulo') }" )
 	PDFer.AnexarArquivo( "ComporvanteAgendamento.pdf", email )
 	PDFer.enviarEmail( email )
@@ -331,7 +332,29 @@ def emprestar():
 	PDFer.AnexarArquivo( "ComporvanteEmprestimo.pdf", email )
 	PDFer.enviarEmail( email )
 
-	return redirect( "/livros/index.html" )
+	return redirect( "/admin/index.html" )
+
+@app.route( "/devolver" )
+def devolver():
+	logado = auth.checar_login( request, l_usuarios )
+	if logado != True:
+		return logado
+
+	usuario_do_cookie = request.cookies.get("usuario")
+	usuario = sequel.encontrar_um( l_usuarios, usuario_do_cookie, ["usuario"] )
+
+	id = int( request.args.get("id") )
+	evento = sequel.encontrar_um( l_eventos, id )
+	livro = sequel.encontrar_um( l_livros, evento.get("livro") )
+
+	PDFer.ComprovanteDevolucao( livro, usuario, evento )
+	email = PDFer.criarEmail( f"Devolução do Livro - { livro.get('titulo') }", usuario.get("email"), f"Comprovante de Devolução do Livro { livro.get('titulo') }" )
+	PDFer.AnexarArquivo( "ComporvanteDevolucao.pdf", email )
+	PDFer.enviarEmail( email )
+
+	sequel.deletar( l_eventos, id )
+
+	return redirect( "/admin/index.html" )
 
 #endregion
 

@@ -1,1 +1,10 @@
-[]
+[
+	{
+		"data-final": "05/12/2023",
+		"data-inicial": "28/11/2023",
+		"id": 1,
+		"livro": 2,
+		"status": "emprestado",
+		"usuario": 1
+	  }
+]

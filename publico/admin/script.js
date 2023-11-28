@@ -21,10 +21,10 @@ async function procurar_emprestimos() {
 				botao = `<td><a href="/emprestar?id=${ d.id }">Emprestar</a></td>`
 				break
 			case "emprestado":
-				botao = `<td><a href="/emprestar?id=${ d.id }">Devolver</a></td>`
+				botao = `<td><a href="/devolver?id=${ d.id }">Devolver</a></td>`
 				break
 			case "atrasado":
-				botao = `<td><a href="/emprestar?id=${ d.id }">Notificar</a></td>`
+				// botao = `<td><a href="/emprestar?id=${ d.id }">Notificar</a></td>`
 				break
 		}
 
