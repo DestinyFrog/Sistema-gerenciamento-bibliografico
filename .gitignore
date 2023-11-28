@@ -1,6 +1,2 @@
-env
 __pycache__
-setup.sh
-data/liv.json
-notas
-notas.zip
+doc.pdf

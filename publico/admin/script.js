@@ -1,37 +1,15 @@
 
-procurar_usuarios()
 procurar_emprestimos()
 
-async function procurar_usuarios() {
-	const response = await fetch( "/usuarios" )
-	const data_cru = await response.text()
-
-	var data = undefined
+async function procurar_emprestimos() {
+	const response = await fetch( "/ler_eventos" )
+	var data = await response.text()
 
 	try {
-		data = JSON.parse( data_cru )
+		data = JSON.parse( data )
 	} catch {
-		document.body.innerHTML = data_cru
-		return
+		document.body.innerHTML = data
 	}
-
-	const el_usu = document.getElementById("lista-usuarios")
-
-	data.forEach( d => {
-		const el = `
-		<tr>
-			<td>${ d.usuario }</td>
-			<td>${ d.senha }</td>
-			<td>${ d.admin }</td>
-		</tr>`
-
-		el_usu.innerHTML += el
-	} )
-}
-
-async function procurar_emprestimos() {
-	const response = await fetch( "/eventos" )
-	const data = await response.json()
 
 	const el_usu = document.getElementById("lista-eventos")
 
@@ -40,24 +18,31 @@ async function procurar_emprestimos() {
 
 		switch( d.status ) {
 			case "agendado":
-				botao = `<td><a href="/emprestimo/${ d.id }">Emprestar</a></td>`
+				botao = `<td><a href="/emprestar?id=${ d.id }">Emprestar</a></td>`
 				break
 			case "emprestado":
-				botao = `<td><a href="/devolucao/${ d.id }">Devolver</a></td>`
+				botao = `<td><a href="/emprestar?id=${ d.id }">Devolver</a></td>`
 				break
 			case "atrasado":
-				botao = `<td><a href="/emprestimo/${ d.id }">Notificar</a></td>`
+				botao = `<td><a href="/emprestar?id=${ d.id }">Notificar</a></td>`
 				break
+		}
+
+		var datas = `
+		<td>${ d["data-inicial"] }</td>
+		<td>${ d["data-final"] }</td>`
+
+		if ( d["data-final"] == null ) {
+			datas = '<td colspan="2" style="border: none;"></td>'
 		}
 
 		const el = `
 		<tr>
 			<td>${ d.id }</td>
-			<td>${ d.data_de_emprestimo }</td>
-			<td>${ d.data_de_devolucao }</td>
+			<td>${ d.status }</td>
 			<td>${ d.usuario?.usuario }</td>
 			<td>${ d.livro.titulo }</td>
-			<td>${ d.status }</td>
+			${ datas }
 			${ botao }
 		</tr>`
 

@@ -2,138 +2,99 @@
 
 *{
     font-family: Roboto Slab;
-    margin: 0;
-    
 }
 
 body {
     background-color:#f5f2ed;
     display: flex;
     flex-direction: column;
+
+	width: 100vw;
+	height: 100vh;
 }
 
-main {
-    display: flex;
-    flex-direction: row;
-    margin: 0;
-    border-radius: 2px;
-}
-
-#seta-esquerda {
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 27rem;
-    margin-left: 3rem;
-    background: rgb(245, 232, 131);
-    color: rgb(69, 69, 69);
-    border-radius: 10px;
-    /* espaçamento entra as palavras e o inicio e tamanho de botão */
-    padding: 0.5rem;
-    cursor: pointer;
-    /* tempo da transição */
-    transition: 110ms;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* propriedades que a transição precisa ter */
-    transition-property: box-shadow, transform;
-    border: none;
-    
-}
-
-#seta-esquerda:hover, #seta-esquerda:focus #seta-esquerda:active {
-    box-shadow: 0 0 20px rgb(244, 244, 184);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-}
 main {
     background-color: #efe4d3;
-    /* width: 50%;
-    height: 50%; */
+    width: 100vw;
+    height: 100%;
+
     display: flex;
+	justify-content: space-around;
     align-items: center;
-    
-    
-    
-}
-
-.lado-esquerdo {
-    display: flex;
-    font-size:small;
-    margin-right: 180px;
-    margin-top: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.tema {
-    display: flex;
-    width: 0px;
-    padding: 2px;
-    flex-direction: top;
-    justify-content: start;
-    margin-bottom: 12rem;
-    margin-left: 5rem;
-    text-decoration:solid;
-}
-
-h3 {
-    display: flex;
-    margin-left: 0;
 }
 
 .container-thumb {
-    margin-left: 7rem;
     display: flex;
-    background: rgb(245, 232, 131);;
-    width: 21.3rem;
-    height: 21rem;
-    border-radius: 50%; 
+	justify-content: center;
+	align-items: center;
+	margin: 10px;
+
+	margin-right: 20px;
+
+    background: rgb(245, 232, 131);
+    height: 80%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
     box-shadow: 10px 10px 4px rgba(10, 0, 0, 0.372)
+}
+
+.container-thumb img {
+	width: auto;
+	height: 100%;
+
+	margin: 20px;
+	object-fit: contain;
+	border: 1px solid #f0f8ff;
+}
+
+.container-content {
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	/* align-items: center; */
+
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 /* css; capa do livro*/
 .thumb {
     display: flex;
     width: 0px;
-    margin-left: 4rem;
-    margin-bottom: 10px;
+    /* margin-left: 4rem; */
+    /* margin-bottom: 10px; */
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.372)
-
-}
-
-/* flores */
-#ef-flores ef-flores1{
-    display: flex;  
-    width: 0px;
-    width: 123px;
-    margin-top: 10rem;
-    margin-left: 10px;
-    
 }
 
 .id-autor {
     display: flex;
     color: rgb(171, 171, 171);
-    margin-top: 1.3rem;
+    /* margin-top: 1.3rem; */
     font-size: medium;
-    width: 0;
-    padding: 0;
+    /* width: 0; */
+    /* padding: 0; */
+}
 
+#in_descricao {
+	font-size: small;
+	padding: 10px;
+	max-width: 400px;
 }
 
 .emprestimo {
     display: flex;
     color: #000000;
     text-shadow: 1px 1px 1px #aed369b6;
-    margin-top: 7rem;
+    /* margin-top: 7rem; */
     font-size: x-small;
-    width: 2px;
+    /* width: 2px; */
 }
 
 .bot-emp {
     display: flex;
-    margin-top: 13.6rem;
+    /* margin-top: 13.6rem; */
     background: rgb(245, 232, 131);
     color: rgb(69, 69, 69);
     border-radius: 12px;
@@ -153,26 +114,20 @@ h3 {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
-.estrelas {
-    margin-bottom: 3.1rem;
-    width: 0;
-    display: flex;
-    flex-direction: row;
+
+@media screen and (max-width: 640px) {
+	body {
+		height: auto;
+		overflow-x: hidden;
+	}
+
+	main {
+		flex-direction: column;
+		padding: 10px;
+	}
+
+	.container-thumb img {
+		height: fit-content;
+		width: 70vw;
+	}
 }
-.estrelas input[type=radio] {
-    display: none;
-    content: '⭐';
-   
-  }
-  .estrelas label i.fa{
-    font-size: 16px;
-  }
-  .estrelas label i.fa:before {
-    content:'\f005';
-    color: rgb(237, 219, 145);
-  }
-  .estrelas input[type=radio]:checked ~ label i.fa:before {
-    color: #CCC;
-  }
-
-

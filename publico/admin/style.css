@@ -6,11 +6,39 @@ body {
 
 main {
 	display: grid;
-	height: 100%;
+	height: auto;
 	grid-template-rows: 1fr 1fr;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100vw;
+	margin-top: 20px;
+}
+
+th {
+	padding: 4px;
 }
 
 td {
 	border: 1px solid black;
 	padding: 3px;
+	min-width: 40px;
+	text-align: center;
+}
+
+input {
+	width: 100%;
+}
+
+input[type="number"] {
+	width: 60px;
+}
+
+#lista-eventos-box {
+	width: auto;
+	border: 1px solid black;
+	padding: 10px;
+	background-color: aliceblue;
 }

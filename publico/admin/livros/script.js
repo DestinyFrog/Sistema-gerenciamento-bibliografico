@@ -36,10 +36,10 @@ function editarDialog( i ) {
 
 function proc_livros() {
 
-	var link = "/livros"
+	var link = "/ler_livros"
 
 	if ( inp_procura.value != "" )
-		link = "/livros?proc=" + inp_procura.value
+		link = "/ler_livros?proc=" + inp_procura.value
 
 	fetch( link )
 	.then( resp => resp.text() )

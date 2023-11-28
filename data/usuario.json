@@ -3,18 +3,21 @@
 		"id": 0,
 		"usuario": "Admin",
 		"senha": "teract",
+		"email": "pedro.calisto.sesisenaisp@gmail.com",
 		"admin": true
 	},
 	{
 		"id": 1,
 		"usuario": "NaoAdmin",
 		"senha": "teract",
+		"email": "pedro.calisto.sesisenaisp@gmail.com",
 		"admin": false
 	},
 	{
 		"id": 2,
 		"usuario": "AqueleQuePermanece",
 		"senha": "tempo",
+		"email": "",
 		"admin": true
 	}
 ]

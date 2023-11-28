@@ -40,7 +40,7 @@ function editarDialog( i ) {
 
 function proc_livros() {
 
-	var link = "/usuarios"
+	var link = "/ler_usuarios"
 
 	if ( inp_procura.value != "" )
 		link = "/usuarios?proc=" + inp_procura.value
@@ -66,6 +66,7 @@ function desenharTabela() {
 			<td>${d.id}</td>
 			<td>${d.usuario}</td>
 			<td>${d.senha}</td>
+			<td>${d.email}</td>
 			<td>${d.admin}</td>
 			<td>
 				<img onclick="editarDialog(${idx})" width="20" src="https://cdn-icons-png.flaticon.com/512/700/700291.png" />

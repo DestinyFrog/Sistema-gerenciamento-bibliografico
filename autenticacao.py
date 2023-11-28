@@ -1,9 +1,9 @@
 from flask import make_response, redirect, render_template
-from memoria import Arquivo
+from sequelier import Sequelier
 
 class Autenticacao:
 	def __init__( self ):
-		self.base = Arquivo( "./data/usuario.json" )
+		self.sequel = Sequelier()
 		self.passos = []
 
 	def pagina_erro( self ):
@@ -13,12 +13,12 @@ class Autenticacao:
 		self.passos = []
 		return resposta
 
-	def logar( self, req ):
+	def logar( self, req, lista_usuario:list ):
 		self.passos = []
 
 		# verifica se foi encontrado um usuario
 		usuario_do_form = req.form.get("usuario")
-		usuario = self.base.encontrar_um( "usuario", usuario_do_form )
+		usuario = self.sequel.encontrar_um( lista_usuario, usuario_do_form, ["usuario"] )
 
 		if usuario == None:
 			self.passos.append("❌ Usuário Não Encontrado")
@@ -39,23 +39,22 @@ class Autenticacao:
 		resposta.set_cookie( "usuario", usuario.get("usuario") )
 		return resposta
 
-	def checar_login( self, req ):
+	def checar_login( self, req, lista_usuario:list ):
 		self.passos = []
 
 		usuario_do_cookie = req.cookies.get("usuario")
-		usuario = self.base.encontrar_um( "usuario", usuario_do_cookie )
+		usuario = self.sequel.encontrar_um( lista_usuario, usuario_do_cookie, ["usuario"] )
 
 		if usuario == None:
 			self.passos.append("❌ Usuário Não Logado")
 			return self.pagina_erro()
-
 		return True
 
-	def checar_admin( self, req ):
+	def checar_admin( self, req, lista_usuario:list ):
 		self.passos = []
 
 		usuario_do_cookie = req.cookies.get("usuario")
-		usuario = self.base.encontrar_um( "usuario", usuario_do_cookie )
+		usuario = self.sequel.encontrar_um( lista_usuario, usuario_do_cookie, ["usuario"] )
 
 		if usuario == None:
 			self.passos.append("❌ Usuário Não Logado")

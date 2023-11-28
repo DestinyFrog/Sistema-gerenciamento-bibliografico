@@ -8,7 +8,8 @@
 	  ],
 	  "id": 1,
 	  "imagem": "https://m.media-amazon.com/images/I/819js3EQwbL._AC_UF1000,1000_QL80_.jpg",
-	  "titulo": "1984"
+	  "titulo": "1984",
+	  "descricao": "\"1984\" é um clássico distópico escrito por George Orwell, que retrata um mundo totalitário dominado pelo Partido. A história segue Winston Smith, um cidadão que se rebela contra a opressão do Grande Irmão, um líder onipresente. O romance explora temas como manipulação da verdade, vigilância extrema e a luta pela liberdade individual em um Estado autoritário."
 	},
 	{
 	  "autor": "Machado de Assis",
@@ -19,7 +20,8 @@
 	  ],
 	  "id": 2,
 	  "imagem": "https://m.media-amazon.com/images/I/61x1ZHomWUL._AC_UF1000,1000_QL80_.jpg",
-	  "titulo": "Dom Casmurro"
+	  "titulo": "Dom Casmurro",
+	  "descricao": "\"Dom Casmurro\", escrito por Machado de Assis, é um clássico da literatura brasileira que narra a história de Bento Santiago, também conhecido como Dom Casmurro. O romance é uma profunda exploração da ciúmes e da subjetividade, enquanto Bento suspeita da traição de sua esposa, Capitu. Com maestria narrativa e ironia, Machado de Assis questiona a natureza da verdade e da memória ao longo dessa trama envolvente."
 	},
 	{
 	  "autor": "Alu\u00edsio Azevedo",
@@ -30,7 +32,8 @@
 	  ],
 	  "id": 4,
 	  "imagem": "https://img.skoob.com.br/LPyaamacdpheexqceQg7tnuSJ-U=/600x0/center/top/filters:format(jpeg)/https://skoob.s3.amazonaws.com/livros/975/O_CORTICO_1383203732B.jpg",
-	  "titulo": "O Corti\u00e7o"
+	  "titulo": "O Corti\u00e7o",
+	  "descricao": "\"O Cortiço\", escrito por Aluísio Azevedo, é um romance naturalista que retrata a vida em um cortiço no Rio de Janeiro do século XIX. A obra explora as condições sociais, as relações humanas e os instintos animais dos personagens que habitam esse ambiente insalubre. Com realismo e crítica social, Azevedo oferece uma visão impactante das disparidades e das forças que moldam a sociedade da época."
 	},
 	{
 	  "autor": "Frank Herbert",
@@ -44,7 +47,8 @@
 	  ],
 	  "id": 6,
 	  "imagem": "https://img.wook.pt/images/duna-frank-herbert/MXwyNDQ1NzQzOHwyMDU0Njc4MnwxNjA0NTAwMjcyMDAw/500x",
-	  "titulo": "Duna"
+	  "titulo": "Duna",
+	  "descricao": "\"Duna\", escrito por Frank Herbert, é uma obra-prima da ficção científica que se desenrola no deserto do planeta Arrakis. A trama segue Paul Atreides, herdeiro de uma família nobre, enquanto ele enfrenta intrigas políticas, poderosas casas feudais e a busca pelo recurso mais valioso do universo: a especiaria melange. Com uma rica mitologia e complexidade política, \"Duna\" cativa os leitores com sua narrativa épica e visão única do futuro."
 	},
 	{
 	  "autor": "Machado de Assis",
@@ -57,7 +61,8 @@
 	  ],
 	  "id": 7,
 	  "imagem": "https://m.media-amazon.com/images/I/51KTqmlBwEL.jpg",
-	  "titulo": "Mem\u00f3rias P\u00f3stumas de Br\u00e1s Cubas"
+	  "titulo": "Mem\u00f3rias P\u00f3stumas de Br\u00e1s Cubas",
+	  "descricao": "\"Memórias Póstumas de Brás Cubas\", obra-prima de Machado de Assis, é uma narrativa pós-morte em que o defunto Brás Cubas relata sua vida e reflexões do além-túmulo. O romance satiriza a sociedade brasileira do século XIX, abordando temas como a hipocrisia, a vaidade e a falta de escrúpulos. Com uma narrativa inovadora e um olhar irônico sobre a condição humana, a obra é um marco do realismo e precursora do modernismo na literatura brasileira."
 	},
 	{
 	  "autor": "Lu\u00eds de Cam\u00f5es",
@@ -69,7 +74,8 @@
 	  ],
 	  "id": 10,
 	  "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Os_Lus%C3%ADadas.jpg/230px-Os_Lus%C3%ADadas.jpg",
-	  "titulo": "Os Lus\u00edadas"
+	  "titulo": "Os Lus\u00edadas",
+	  "descricao": "\"Os Lusíadas\", épico escrito por Luís de Camões, é uma obra fundamental da literatura portuguesa que celebra as conquistas marítimas e a história de Portugal. Através da jornada do herói Vasco da Gama, a epopeia narra as viagens dos navegadores portugueses pelo caminho marítimo para as Índias. Com uma linguagem poética rica e uma mistura de mitologia e história, Camões enaltece o espírito aventureiro e a grandiosidade da nação portuguesa."
 	}
   ]
   

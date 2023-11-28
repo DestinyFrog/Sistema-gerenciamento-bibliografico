@@ -2,48 +2,44 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>acervo</title>
-    <link rel="stylesheet" href="/global.css">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <!-- 26 d efeveiro mel-->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>acervo</title>
+	<link rel="stylesheet" href="/global.css">
+	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<!-- 26 d efeveiro mel-->
 </head>
 
 <body>
-    <a href="/sair" id="sair">Sair</a>
+	<a href="/sair" id="sair">Sair</a>
 
-    <!-- header é igual uma div que fica em cima -->
-    <header>
-        <h1 id="logo">SideLook</h1>
-    </header>
+	<!-- header é igual uma div que fica em cima -->
+	<header>
+		<h1 id="logo">SideLook</h1>
+		<nav>
+			<a href="/livros/index.html">Voltar</a>
+		</nav>
+	</header>
 
-    <!-- quando uma div é muito grande, pode colocar de main pra poder referenciar melhor -->
-    <main>
-        <!-- voltar para a tela inicial -->
+	<!-- quando uma div é muito grande, pode colocar de main pra poder referenciar melhor -->
+	<main>
+		<section class="container-thumb">
+			<img src="antro.jpg" id="in_imagem">
+		</section>
 
+		<section class="container-content">
+			<div class="tema">
+				<h2 id="in_titulo"></h2>
+				<h3 class="id-autor" id="in_autor"></h3>
+			</div>
 
-        <a href="/livros/index.html">
-            <img src="seta-pequena-esquerda.png" width="20px" id="seta-esquerda">
-        </a>
+			<p id="in_descricao"></p>
+			<a class="bot-emp" id="in_but_empres"></a>
+		</section>
+	</main>
 
-        <div class="container-thumb">
-            <div class="thumb">
-                <img src="antro.jpg" id="in_imagem" width="210" height="340px">
-            </div>
-        </div>
-
-        <div class="tema">
-            <h2 id="in_titulo">Antropoceno: Notas Sobre a Vida na Terra</h2>
-        </div>
-        <h3 class="id-autor" id="in_autor">John Green</h3>
-        <h4 class="emprestimo" id="in_empres"> Disponivel para Empréstimo ✅</h4>
-        <button class="bot-emp" id="in_but_empres">Agendar Empréstimo</button>
-
-    </main>
-
-    <script src="./script.js"></script>
+	<script src="./script.js"></script>
 </body>
 
 </html>

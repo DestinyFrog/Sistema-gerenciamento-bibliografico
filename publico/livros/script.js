@@ -9,10 +9,10 @@ async function procurar() {
 	const val = inp_proc.value
 	main.innerHTML = "<p>Loading ...</p>"
 
-	var link = "/livros"
+	var link = "/ler_livros"
 
 	if ( val !== "" )
-		link = `/livros?proc=${inp_proc.value}`
+		link = `/ler_livros?proc=${inp_proc.value}`
 
 	const response = await fetch( link )
 	const txt = await response.text()
