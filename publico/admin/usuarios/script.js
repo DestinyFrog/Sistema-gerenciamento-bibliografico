@@ -25,7 +25,7 @@ function deletar( id, titulo ) {
 	res = confirm( `Deseja deletar o usuario: ${titulo}` )
 
 	if ( res == true )
-		window.location.href = `/remover_usuario?id=${id}`
+		window.location.href = `/del_usuarios?id=${id}`
 }
 
 function editarDialog( i ) {
@@ -36,6 +36,7 @@ function editarDialog( i ) {
 	document.getElementById("inp_usuario").value = d.usuario
 	document.getElementById("inp_senha").value = d.senha
 	document.getElementById("inp_admin").checked = d.admin
+	document.getElementById("inp_email").value = d.email
 }
 
 function proc_livros() {
@@ -43,7 +44,7 @@ function proc_livros() {
 	var link = "/ler_usuarios"
 
 	if ( inp_procura.value != "" )
-		link = "/usuarios?proc=" + inp_procura.value
+		link = "/ler_usuarios?proc=" + inp_procura.value
 
 	fetch( link )
 	.then( resp => resp.text() )

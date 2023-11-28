@@ -69,11 +69,9 @@ class Sequelier():
 
 	def editar( self, lista:list, id:int, valor:dict ):
 		item = self.encontrar_um( lista, id )
-		print( "ITEM:", item )
 
 		for campo in valor.keys():
 			if valor.get(campo) != None:
-				print( "CAMPO:", campo )
 				item[campo] = valor.get(campo)
 		return item
 

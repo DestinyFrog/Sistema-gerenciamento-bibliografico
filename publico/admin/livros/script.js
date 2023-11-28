@@ -20,7 +20,7 @@ function deletar( id, titulo ) {
 	res = confirm( `Deseja deletar o livro: ${titulo}` )
 
 	if ( res == true )
-		window.location.href = `/remover_livro?id=${id}`
+		window.location.href = `/del_livros?id=${id}`
 }
 
 function editarDialog( i ) {

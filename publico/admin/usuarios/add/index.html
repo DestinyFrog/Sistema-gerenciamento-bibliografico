@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Olá Administrador</title>
+	<link rel="favicon" type="image/x-icon" href="#">
+	<link rel="stylesheet" href="/global.css">
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+	<a href="/sair" id="sair">Sair</a>
+
+	<header>
+		<h1 id="logo">SideLook</h1>
+		<nav>
+			<a href="/livros/index.html">Livros</a>
+			<a href="/admin/index.html">Pagina Admin</a>
+			<a href="/admin/usuarios/index.html">Controle de Usuários</a>
+			<a href="/admin/livros/index.html">Controle de Livros</a>
+		</nav>
+	</header>
+
+<main>
+<div id="card">
+<h2>Adicione Aqui o Usuário Desejado</h2>
+
+<form id="addBookForm" action="/add_usuarios" method="get">
+
+	<label for="title">Nome de Usuário:</label>
+	<input type="text" id="title" name="usuario" required>
+
+	<label for="author">Senha:</label>
+	<input type="password" id="author" name="senha" required>
+
+	<label for="author">Email:</label>
+	<input type="email" id="author" name="email" required>
+
+	<input type="submit" value="Adicionar Usuário">
+</form>
+
+</div>
+</main>
+
+</body>

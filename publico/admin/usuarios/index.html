@@ -23,7 +23,7 @@
 	</header>
 
 	<dialog id="editar-box">
-		<form method="GET" action="/editar_usuario">
+		<form method="GET" action="/edit_usuarios">
 			<input type="hidden" id="inp_id" name="id">
 
 			<div>
@@ -43,7 +43,7 @@
 
 			<div>
 				<label for="inp_admin">Administrador ? </label>
-				<input type="checkbox" name="autor" id="inp_admin">
+				<input type="checkbox" name="admin" id="inp_admin">
 			</div>
 
 			<div>
@@ -62,6 +62,11 @@
 
 			<table>
 				<thead>
+					<tr>
+						<th colspan="7">
+							<a href="/admin/usuarios/add/index.html">Adicionar Usuários</a>
+						</th>
+					</tr>
 					<tr>
 						<th>ID</th>
 						<th>Usuário</th>

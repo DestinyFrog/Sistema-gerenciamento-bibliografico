@@ -6,7 +6,7 @@ Implementação de back-end básico para cadastrar livros, periódicos e folheto
 
 ## Para fazer:
 - [x] Implementar a funcionalidade de empréstimo e devolução de materiais.
-- [ ] Desenvolver a geração de comprovantes para empréstimos e devoluções.
+- [x] Desenvolver a geração de comprovantes para empréstimos e devoluções.
 - [x] Implementar a busca e filtragem de materiais no acervo.
 - [x] Integrar as partes front-end e back-end para as funcionalidades completas.
 - [x] Preparar a aplicação para publicação, configurando o ambiente de produção.

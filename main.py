@@ -4,7 +4,6 @@ from sequelier import Sequelier
 from autenticacao import Autenticacao
 from pdfer import PDFer
 import json
-import asyncio
 import sys
 
 #region Dados
@@ -97,11 +96,13 @@ def add_livros():
 	novo_livro["titulo"] = request.args.get("titulo")
 	novo_livro["autor"] = request.args.get("autor")
 	novo_livro["imagem"] = request.args.get("imagem")
-	novo_livro["generos"] = request.args.get("tags").split(",")
+	novo_livro["generos"] = request.args.get("tags").split("\r\n")
+	novo_livro["descricao"] = request.args.get("descricao")
 
-	data = sequel.adicionar( l_livros, novo_livro )
-	resposta = make_response( data )
-	return resposta
+	sequel.adicionar( l_livros, novo_livro )
+	# resposta = make_response( data )
+	# return resposta
+	return redirect( "/admin/livros/index.html" )
 
 @app.route( "/edit_livros" )
 def edit_livros():
@@ -120,9 +121,8 @@ def edit_livros():
 	if livro_editado.get("generos") != None:
 		livro_editado["generos"].split("\n")
 
-	data = sequel.editar( l_livros, id, livro_editado )
-	resposta = make_response( data )
-	return resposta
+	sequel.editar( l_livros, id, livro_editado )
+	return redirect( "/admin/livros/index.html" )
 
 @app.route( "/del_livros" )
 def del_livros():
@@ -131,9 +131,8 @@ def del_livros():
 		return logado
 
 	id = int( request.args.get("id") )
-	data = sequel.deletar( l_livros, id )
-	resposta = make_response( data )
-	return resposta
+	sequel.deletar( l_livros, id )
+	return redirect( "/admin/livros/index.html" )
 
 #endregion
 
@@ -169,12 +168,11 @@ def add_usuarios():
 
 	novo_usuario["usuario"] = request.args.get("usuario")
 	novo_usuario["senha"] = request.args.get("senha")
-	novo_usuario["admin"] = request.args.get("admin")
+	novo_usuario["admin"] = False
 	novo_usuario["email"] = request.args.get("email")
 
-	data = sequel.adicionar( l_usuarios, novo_usuario )
-	resposta = make_response( data )
-	return resposta
+	sequel.adicionar( l_usuarios, novo_usuario )
+	return redirect( "/admin/usuarios/index.html" )
 
 @app.route( "/edit_usuarios" )
 def edit_usuarios():
@@ -187,12 +185,11 @@ def edit_usuarios():
 	usuario_editado = {}
 	usuario_editado["usuario"] = request.args.get("usuario")
 	usuario_editado["senha"] = request.args.get("senha")
-	usuario_editado["admin"] = request.args.get("admin")
+	usuario_editado["admin"] = request.args.get("admin") == "on"
 	usuario_editado["email"] = request.args.get("email")
 
-	data = sequel.editar( l_usuarios, id, usuario_editado )
-	resposta = make_response( data )
-	return resposta
+	sequel.editar( l_usuarios, id, usuario_editado )
+	return redirect( "/admin/usuarios/index.html" )
 
 @app.route( "/del_usuarios" )
 def del_usuarios():
@@ -201,9 +198,8 @@ def del_usuarios():
 		return logado
 
 	id = int( request.args.get("id") )
-	data = sequel.deletar( l_usuarios, id )
-	resposta = make_response( data )
-	return resposta
+	sequel.deletar( l_usuarios, id )
+	return redirect( "/admin/usuarios/index.html" )
 
 @app.route( "/logar", methods=["POST","GET"] )
 def logar():

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Olá Administrador</title>
+	<link rel="favicon" type="image/x-icon" href="#">
+	<link rel="stylesheet" href="/global.css">
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+	<a href="/sair" id="sair">Sair</a>
+
+	<header>
+		<h1 id="logo">SideLook</h1>
+		<nav>
+			<a href="/livros/index.html">Livros</a>
+			<a href="/admin/index.html">Pagina Admin</a>
+			<a href="/admin/usuarios/index.html">Controle de Usuários</a>
+			<a href="/admin/livros/index.html">Controle de Livros</a>
+		</nav>
+	</header>
+
+	<main>
+	<div id="card">
+		<h2>Adicione Aqui o Livro Desejado</h2>
+
+		<form id="addBookForm" action="/add_livros" method="get">
+			<label for="title">Título do Livro:</label>
+			<input type="text" id="title" name="titulo" required>
+
+			<label for="author">Autor do Livro:</label>
+			<input type="text" id="author" name="autor" required>
+
+			<label for="author">Link da Imagem:</label>
+			<input type="text" id="author" name="imagem" required>
+
+			<label for="description">Tags:</label>
+			<textarea id="description" name="tags" rows="2" required></textarea>
+
+			<label for="description">Descrição:</label>
+			<textarea id="description" name="descricao" rows="4" required></textarea>
+
+			<input type="submit" value="Adicionar Livro">
+			<!-- <button type="button" onclick="addBook()">Adicionar Livro</button> -->
+		</form>
+
+	</div>
+	</main>
+
+</body>
