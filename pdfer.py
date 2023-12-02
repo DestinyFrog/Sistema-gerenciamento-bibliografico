@@ -38,7 +38,7 @@ class PDFer:
 	def ComprovanteAgendamento( self, livro, usuario, evento ):
 		pdf = FPDF()
 		pdf.add_page()
-		pdf.set_font('Arial', 'B', 16)
+		pdf.set_font('Courier', 'B', 12)
 
 		intros = [
 			"SENAI - SP",
@@ -64,7 +64,7 @@ class PDFer:
 	def ComprovanteEmprestimo( self, livro, usuario, evento ):
 		pdf = FPDF()
 		pdf.add_page()
-		pdf.set_font('Arial', 'B', 16)
+		pdf.set_font('Courier', 'B', 12)
 
 		intros = [
 			"SENAI - SP",
@@ -89,7 +89,7 @@ class PDFer:
 	def ComprovanteDevolucao( self, livro, usuario, evento ):
 		pdf = FPDF()
 		pdf.add_page()
-		pdf.set_font('Arial', 'B', 16)
+		pdf.set_font('Courier', 'B', 12)
 
 		intros = [
 			"SENAI - SP",
@@ -110,3 +110,32 @@ class PDFer:
 
 		[ pdf.cell(40, 10, txt, ln=1 ) for txt in intros ]
 		pdf.output('doc.pdf', 'F')
+
+	def RelatorioLivros( self, livros ):
+		pdf = FPDF()
+		pdf.add_page()
+		pdf.set_font('Courier', 'B', 12)
+
+		intros = []
+		espacos = [ 24, 20, 12, 6 ]
+
+		txt = ""
+		for idx, campo in enumerate( [ "TÍTULO", "AUTOR", "STATUS", "ACESSOS" ] ):
+			txt += campo + ( " " * ( espacos[idx] - len( campo ) ) )
+		pdf.cell(w=0, h=7, txt=txt, ln=1, border='B' )
+
+		for livro in livros:
+			txt = ""
+
+			campos = [ livro.get("titulo"), livro.get("autor"), livro.get("status"), str( livro.get("acessos") ) ]
+
+			for idx, campo in enumerate( campos ):
+				if len( campo ) >= espacos[idx]:
+					campo = campo[: espacos[idx] - 4 ] + "..."
+				txt += campo + ( " " * ( espacos[idx] - len( campo ) ) )
+
+			intros.append( txt )
+
+		[ pdf.cell(w=0, h=7, txt=txt, ln=1, border='B' ) for txt in intros ]
+
+		pdf.output( "doc.pdf", 'F' )

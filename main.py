@@ -50,6 +50,28 @@ def paginas_publicas( path:str ):
 
 #region Livros
 
+@app.route( "/relatorio_livros" )
+def relatorio_livros():
+	logado = auth.checar_admin( request, l_usuarios )
+	if logado != True:
+		return logado
+
+	data = sequel.ler( l_livros )
+
+	for i in data:
+		evento = sequel.encontrar_um( l_eventos, i.get("id"), ["livro"] )
+		if evento == None:
+			i["status"] = "disponível"
+		else:
+			i["status"] = evento.get("status")
+
+	PDFer.RelatorioLivros( data )
+
+	with open( "doc.pdf", "rb" ) as file:
+		resposta = make_response( file.read() )
+		resposta.headers['Content-Type'] = 'application/pdf'
+		return resposta
+
 @app.route( "/ler_livros" )
 def ler_livros():
 	logado = auth.checar_login( request, l_usuarios )
