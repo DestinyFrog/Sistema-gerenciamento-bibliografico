@@ -321,10 +321,13 @@ def agendar():
 
 	evento = sequel.adicionar( l_eventos, novo_evento )
 	livro = sequel.encontrar_um( l_livros, livro_id )
+	usuario = sequel.encontrar_um( l_usuarios, evento.get("usuario") )
+
+	livro["acessos"] = livro["acessos"] + 1
 
 	PDFer.ComprovanteAgendamento( livro, usuario, evento )
 	email = PDFer.criarEmail( f"Agendamento do Livro - { livro.get('titulo') }", usuario.get("email"), f"Comprovante de Agendamento do Livro { livro.get('titulo') }" )
-	PDFer.AnexarArquivo( "ComporvanteAgendamento.pdf", email )
+	PDFer.AnexarArquivo( "ComprovanteAgendamento.pdf", email )
 	PDFer.enviarEmail( email )
 
 	return redirect( "/livros/index.html" )
@@ -342,16 +345,14 @@ def emprestar():
 		"data-final": data_final.strftime("%d/%m/%Y"),
 		"status": "emprestado"
 	}
-
-	usuario_do_cookie = request.cookies.get("usuario")
-	usuario = sequel.encontrar_um( l_usuarios, usuario_do_cookie, ["usuario"] )
 	
 	evento = sequel.editar( l_eventos, int( request.args.get("id") ), evento_editado )
 	livro = sequel.encontrar_um( l_livros, evento.get("livro") )
+	usuario = sequel.encontrar_um( l_usuarios, evento.get("usuario") )
 
 	PDFer.ComprovanteEmprestimo( livro, usuario, evento )
 	email = PDFer.criarEmail( f"Empréstimo do Livro - { livro.get('titulo') }", usuario.get("email"), f"Comprovante de Empréstimo do Livro { livro.get('titulo') }" )
-	PDFer.AnexarArquivo( "ComporvanteEmprestimo.pdf", email )
+	PDFer.AnexarArquivo( "ComprovanteEmprestimo.pdf", email )
 	PDFer.enviarEmail( email )
 
 	return redirect( "/admin/index.html" )
@@ -362,16 +363,14 @@ def devolver():
 	if logado != True:
 		return logado
 
-	usuario_do_cookie = request.cookies.get("usuario")
-	usuario = sequel.encontrar_um( l_usuarios, usuario_do_cookie, ["usuario"] )
-
 	id = int( request.args.get("id") )
 	evento = sequel.encontrar_um( l_eventos, id )
 	livro = sequel.encontrar_um( l_livros, evento.get("livro") )
+	usuario = sequel.encontrar_um( l_usuarios, evento.get("usuario") )
 
 	PDFer.ComprovanteDevolucao( livro, usuario, evento )
 	email = PDFer.criarEmail( f"Devolução do Livro - { livro.get('titulo') }", usuario.get("email"), f"Comprovante de Devolução do Livro { livro.get('titulo') }" )
-	PDFer.AnexarArquivo( "ComporvanteDevolucao.pdf", email )
+	PDFer.AnexarArquivo( "ComprovanteDevolucao.pdf", email )
 	PDFer.enviarEmail( email )
 
 	sequel.deletar( l_eventos, id )
