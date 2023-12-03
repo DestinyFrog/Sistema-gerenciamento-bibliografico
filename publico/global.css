@@ -23,6 +23,8 @@ p {
 }
 
 #sair {
+	background-image: url("https://www.svgrepo.com/show/151987/opened-door-aperture.svg");
+
 	position: fixed;
 	top: 5px;
 	left: 5px;

@@ -290,3 +290,43 @@ Press CTRL+C to quit
 177.206.79.212 - - [03/Dec/2023 13:20:39] "GET /global.css HTTP/1.1" 304 -
 177.206.79.212 - - [03/Dec/2023 13:20:39] "GET /img/lupa.svg HTTP/1.1" 304 -
 177.206.79.212 - - [03/Dec/2023 13:20:39] "GET /ler_livros HTTP/1.1" 200 -
+177.206.79.212 - - [03/Dec/2023 13:35:39] "GET / HTTP/1.1" 302 -
+177.206.79.212 - - [03/Dec/2023 13:35:42] "GET / HTTP/1.1" 302 -
+177.206.79.212 - - [03/Dec/2023 13:38:40] "GET /admin/index.html HTTP/1.1" 304 -
+ * Serving Flask app 'main'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.31.39.31:80
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 113-959-129
+177.206.79.212 - - [03/Dec/2023 13:49:09] "GET / HTTP/1.1" 302 -
+177.206.79.212 - - [03/Dec/2023 13:49:09] "GET /login/index.html HTTP/1.1" 200 -
+177.206.79.212 - - [03/Dec/2023 13:49:11] "GET /global.css HTTP/1.1" 200 -
+177.206.79.212 - - [03/Dec/2023 13:49:11] "GET /login/node_modules/particles.js/particles.js HTTP/1.1" 200 -
+177.206.79.212 - - [03/Dec/2023 13:49:11] "GET /login/style.css HTTP/1.1" 200 -
+177.206.79.212 - - [03/Dec/2023 13:49:11] "GET /login/node_modules/particles.js/demo/js/app.js HTTP/1.1" 200 -
+177.206.79.212 - - [03/Dec/2023 13:49:15] "GET /favicon.ico HTTP/1.1" 404 -
+ * Serving Flask app 'main'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.31.39.31:80
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 113-959-129
+ * Serving Flask app 'main'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://172.31.39.31:80
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 113-959-129
