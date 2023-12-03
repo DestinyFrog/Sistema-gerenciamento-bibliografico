@@ -7,21 +7,25 @@
 	box-sizing: border-box;
 }
 
-#botao-voltar {
-	max-width: 40px;
+body {
+	background-color: #f6e8b1;
+}
 
-	position: fixed;
-	top: 40px;
-	right: 10px;
-	transform: translate( -50%, -50% );
+h1 {
+	color: #89725b;
+}
 
-	cursor: pointer;
+p {
+	/* color: #89725b; */
+	color: black;
+	font-weight: bolder;
+	font-size: 16px;
 }
 
 #sair {
 	position: fixed;
-	bottom: 5px;
-	right: 5px;
+	top: 5px;
+	left: 5px;
 
 	background-color: black;
 	color: aliceblue;
@@ -33,14 +37,14 @@
 header {
 	width: 100vw;
 	height: 60px;
-	background-color: aliceblue;
+	background-color: #B0CC99;
 
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 
-	border-bottom: 4px solid black;
+	/* border-bottom: 4px solid black; */
 	padding-left: 50px;
 	padding-right: 50px;
 }
@@ -48,6 +52,7 @@ header {
 header #logo {
 	font-family: Roboto Slab, sans-serif;
 	text-decoration: overline underline;
+	color: black;
 }
 
 header nav {
