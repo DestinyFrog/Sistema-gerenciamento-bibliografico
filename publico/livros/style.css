@@ -14,6 +14,8 @@ main {
 	/* width: min-content; */
 	max-width: 100vw;
 	padding: 16px;
+
+	margin-bottom: 50px;
 }
 
 .card {
@@ -119,8 +121,9 @@ main {
 	}
 
 	#search-box {
-		transform: translate( 0%, calc( -100% + -10px ) );
+		transform: translate( -50%, calc( -100% + -10px ) );
 		top: 100%;
-		right: 10px;
+		left: 50vw;
+		width: 90vw;
 	}
 }
