@@ -49,11 +49,20 @@ th, td {
 	width: auto;
 }
 
+input, textarea {
+	width: 100%;
+	max-width: 300px;
+}
+
 #editar-box {
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate( -50%, -50% );
+}
+
+tr {
+	padding: 6px;
 }
 
 .capa {
