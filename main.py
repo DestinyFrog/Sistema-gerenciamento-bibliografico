@@ -120,6 +120,7 @@ def add_livros():
 	novo_livro["imagem"] = request.args.get("imagem")
 	novo_livro["generos"] = request.args.get("tags").split("\r\n")
 	novo_livro["descricao"] = request.args.get("descricao")
+	novo_livro["acessos"] = 0
 
 	sequel.adicionar( l_livros, novo_livro )
 	# resposta = make_response( data )
@@ -245,6 +246,23 @@ def sair():
 
 #region Eventos
 
+@app.route( "/relatorio_eventos" )
+def relatorio_eventos():
+	logado = auth.checar_admin( request, l_usuarios )
+	if logado != True:
+		return logado
+
+	data = sequel.ler( l_eventos )
+	data = sequel.conectar( data, l_usuarios, "usuario" )
+	data = sequel.conectar( data, l_livros, "livro" )
+
+	PDFer.RelatorioEventos( data )
+
+	with open( "doc.pdf", "rb" ) as file:
+		resposta = make_response( file.read() )
+		resposta.headers['Content-Type'] = 'application/pdf'
+		return resposta
+
 @app.route( "/ler_eventos" )
 def ler_eventos():
 	logado = auth.checar_admin( request, l_usuarios )
@@ -347,6 +365,7 @@ def emprestar():
 	}
 	
 	evento = sequel.editar( l_eventos, int( request.args.get("id") ), evento_editado )
+
 	livro = sequel.encontrar_um( l_livros, evento.get("livro") )
 	usuario = sequel.encontrar_um( l_usuarios, evento.get("usuario") )
 

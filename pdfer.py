@@ -114,10 +114,10 @@ class PDFer:
 	def RelatorioLivros( self, livros ):
 		pdf = FPDF()
 		pdf.add_page()
-		pdf.set_font('Courier', 'B', 12)
+		pdf.set_font('Courier', 'B', 8)
 
 		intros = []
-		espacos = [ 24, 20, 12, 6 ]
+		espacos = [ 40, 20, 12, 6 ]
 
 		txt = ""
 		for idx, campo in enumerate( [ "TÍTULO", "AUTOR", "STATUS", "ACESSOS" ] ):
@@ -128,6 +128,40 @@ class PDFer:
 			txt = ""
 
 			campos = [ livro.get("titulo"), livro.get("autor"), livro.get("status"), str( livro.get("acessos") ) ]
+
+			for idx, campo in enumerate( campos ):
+				if len( campo ) >= espacos[idx]:
+					campo = campo[: espacos[idx] - 4 ] + "..."
+				txt += campo + ( " " * ( espacos[idx] - len( campo ) ) )
+
+			intros.append( txt )
+
+		[ pdf.cell(w=0, h=7, txt=txt, ln=1, border='B' ) for txt in intros ]
+
+		pdf.output( "doc.pdf", 'F' )
+
+	def RelatorioEventos( self, eventos:list ):
+		pdf = FPDF()
+		pdf.add_page()
+		pdf.set_font('Courier', 'B', 8)
+
+		intros = []
+		espacos = [ 50, 20, 12, 40 ]
+
+		txt = ""
+		for idx, campo in enumerate( [ "USUÁRIO", "LIVRO", "STATUS", "DATA FINAL"] ):
+			txt += campo + ( " " * ( espacos[idx] - len( campo ) ) )
+		pdf.cell(w=0, h=7, txt=txt, ln=1, border='B' )
+
+		for evento in eventos:
+			txt = ""
+
+			campos = [
+				evento.get("usuario").get("usuario") + " (" + evento.get("usuario").get("email") + ")",
+				str( evento.get("livro").get("id") ) + "-" + evento.get("livro").get("titulo"),
+				evento.get("status"),
+				evento.get("data-inicial") + " - " + ( evento.get("data-final") or "x" )
+			]
 
 			for idx, campo in enumerate( campos ):
 				if len( campo ) >= espacos[idx]:

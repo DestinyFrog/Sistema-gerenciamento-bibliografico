@@ -1,20 +1,36 @@
 
 body {
 	width: 100vw;
-	height: 100vh;
+	/* height: 100vh; */
 }
 
 main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 100%;
+}
+
+main section {
 	display: grid;
 	height: auto;
 	grid-template-rows: 1fr 1fr;
 
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
-	width: 100vw;
+	/* width: 100vw; */
 	margin-top: 20px;
+
+	min-width: 600px;
+	width: min-content;
+	border: 1px solid black;
+	padding: 10px;
+	background-color: aliceblue;
 }
 
 th {
@@ -34,11 +50,4 @@ input {
 
 input[type="number"] {
 	width: 60px;
-}
-
-#lista-eventos-box {
-	width: auto;
-	border: 1px solid black;
-	padding: 10px;
-	background-color: aliceblue;
 }

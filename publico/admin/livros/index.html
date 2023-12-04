@@ -6,7 +6,8 @@
 	<title>Olá Administrador</title>
 	<link rel="favicon" type="image/x-icon" href="#">
 	<link rel="stylesheet" href="/global.css">
-	<link rel="stylesheet" href="./style.css">
+	<!-- <link rel="stylesheet" href="./style.css"> -->
+	<link rel="stylesheet" href="/admin/style_each.css">
 </head>
 
 <body>
@@ -15,11 +16,29 @@
 	<header>
 		<h1 id="logo">SideLook</h1>
 		<nav>
-			<a href="/livros/index.html">Livros</a>
-			<a href="/admin/index.html">Pagina Admin</a>
-			<a href="/admin/usuarios/index.html">Controle de Usuários</a>
-			<a>Controle de Livros</a>
-		</nav> 
+			<a class="menu-item" href="/livros/index.html">Livros</a>
+			<a class="menu-item" href="/admin/index.html">Pagina<br/>Admin</a>
+
+			<ul class="dropdown-list">
+				<li>
+					<a class="menu-item" href="#">Relatórios</a>
+					<ul class="dropdown">
+						<li><a href="/relatorio_livros" target="_blank">Livros</a></li>
+						<li><a href="/relatorio_eventos" target="_blank">Eventos</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<ul class="dropdown-list">
+				<li>
+					<a class="menu-item" href="#">Controle</a>
+					<ul class="dropdown">
+						<!-- <li><a href="/admin/livros/index.html">Livros</a></li> -->
+						<li><a href="/admin/usuarios/index.html">Usuários</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
 	</header>
 
 	<dialog id="editar-box">
@@ -55,18 +74,16 @@
 
 	<main>
 		<section id="lista-livros-box">
+
 			<div id="inp-procura-box">
 				<img width="20px" src="/img/lupa.svg" alt="icone-pesquisa">
 				<input type="text" id="inp-procura" placeholder="...">
 			</div>
 
+			<a id="add-box" href="/admin/livros/add/index.html">Adicionar Livros</a>
+
 			<table>
 				<thead>
-					<tr>
-						<th colspan="6">
-							<a href="/admin/livros/add/index.html">Adicionar Livros</a>
-						</th>
-					</tr>
 					<tr>
 						<th>ID</th>
 						<th>Capa</th>

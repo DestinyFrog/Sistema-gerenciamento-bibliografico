@@ -44,7 +44,8 @@ body {
 }
 
 #particles-js {
-    background: #4b6d90;
+    /* background-color: #4b6d90; */
+	/* background-color:red; */
     position: fixed;
     top: 0;
     left: 0;
@@ -53,14 +54,14 @@ body {
     width: 100vw;
 }
 
-
 main {
     width: 375px;
-    height: 70vh;
+    /* height: 70vh; */
+	height: auto;
     display: grid;
     grid-template-columns: 12fr 10fr;
     border-radius: 20px;
-    background-color: rgba(130, 168, 210, 0.322);;
+    /* background-color: rgba(130, 168, 210, 0.322); */
     /* Cor de fundo com transparência */
     padding: 26px;
 }
@@ -83,7 +84,7 @@ main h1 {
     /* Cor do cabeçalho */
     font-size: 2rem;
     /* Tamanho do texto do cabeçalho */
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
     /* Margem inferior do cabeçalho */
     text-align: center;
     /* Alinhamento do texto do cabeçalho */

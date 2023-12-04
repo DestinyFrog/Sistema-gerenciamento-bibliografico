@@ -15,17 +15,33 @@
 	<header>
 		<h1 id="logo">SideLook</h1>
 		<nav>
-			<nav>
-				<a href="/livros/index.html">Livros</a>
-				<a>Pagina Admin</a>
-				<a href="/admin/usuarios/index.html"></ahref>Controle de Usuários</a>
-				<a href="/admin/livros/index.html">Controle de Livros</a>
-			</nav>
+			<a class="menu-item" href="/livros/index.html">Livros</a>
+			<!-- <a class="menu-item">Pagina<br/>Admin</a> -->
+
+			<ul class="dropdown-list">
+				<li>
+					<a class="menu-item" href="#">Relatórios</a>
+					<ul class="dropdown">
+						<li><a href="/relatorio_livros" target="_blank">Livros</a></li>
+						<li><a href="/relatorio_eventos" target="_blank">Eventos</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<ul class="dropdown-list">
+				<li>
+					<a class="menu-item" href="#">Controle</a>
+					<ul class="dropdown">
+						<li><a href="/admin/livros/index.html">Livros</a></li>
+						<li><a href="/admin/usuarios/index.html">Usuários</a></li>
+					</ul>
+				</li>
+			</ul>
 		</nav>
 	</header>
 
 	<main>
-		<section id="lista-eventos-box">
+		<section>
 			<table>
 				<thead>
 					<tr>

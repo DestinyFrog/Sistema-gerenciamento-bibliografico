@@ -15,7 +15,7 @@ h1 {
 	color: #89725b;
 }
 
-p {
+p, a {
 	/* color: #89725b; */
 	color: black;
 	font-weight: bolder;
@@ -28,13 +28,17 @@ p {
 
 	position: fixed;
 	top: 5px;
-	left: 5px;
+	left: 8px;
 
 	background-color: black;
 	color: aliceblue;
 	padding: 2px;
 
 	z-index: 10;
+}
+
+.pallete-2 {
+	background-color: #B0CC99;
 }
 
 header {
@@ -48,8 +52,64 @@ header {
 	align-items: center;
 
 	/* border-bottom: 4px solid black; */
-	padding-left: 50px;
-	padding-right: 50px;
+	padding-left: 70px;
+	padding-right: 70px;
+}
+
+.menu-item {
+	padding: auto, 6px;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	min-width: 140px;
+
+	background-color: #B7CA79;
+
+	height: 100%;
+	/* width: 120px; */
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.dropdown-list {
+	list-style: none;
+	display: block;
+	width: 100%;
+	padding: 0;
+}
+
+.dropdown-list li {
+	display: inline-block;
+	position: relative;
+	height: 100%;
+}
+
+.dropdown-list li .menu-item {
+	display: flex;
+	text-align: center;
+	text-decoration: none;
+}
+
+ul li ul.dropdown {
+	width: 100%;
+	position: absolute;
+	z-index: 999;
+	display: none;
+}
+
+ul li ul.dropdown li {
+	display: block;
+	background-color: #B0CC99;
+	border: 1px solid #89725b;
+
+	padding: 8px;
+	width: 100%;
+}
+
+ul li:hover ul.dropdown {
+	display: block;
 }
 
 header #logo {
@@ -63,18 +123,4 @@ header nav {
 
 	width: auto;
 	height: 100%;
-}
-
-header nav a {
-	height: 100%;
-	width: 100px;
-	
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-}
-
-header nav a:hover {
-	border-top: 3px solid black;
 }
