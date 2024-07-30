@@ -82,6 +82,19 @@
 	  "titulo": "Os Lus\u00edadas",
 	  "acessos": 0,
 	  "descricao": "\"Os Lusíadas\", épico escrito por Luís de Camões, é uma obra fundamental da literatura portuguesa que celebra as conquistas marítimas e a história de Portugal. Através da jornada do herói Vasco da Gama, a epopeia narra as viagens dos navegadores portugueses pelo caminho marítimo para as Índias. Com uma linguagem poética rica e uma mistura de mitologia e história, Camões enaltece o espírito aventureiro e a grandiosidade da nação portuguesa."
+	},
+	{
+	  "autor": "Lima Barreto",
+	  "generos": [
+		"Literatura Brasileira",
+		"Romance",
+		"Crítica Social"
+	  ],
+	  "id": 11,
+	  "imagem": "https://m.media-amazon.com/images/I/61OFWszMzwL._AC_UF1000,1000_QL80_.jpg",
+	  "titulo": "Triste Fim de Policarpo Quaresma",
+	  "acessos": 0,
+	  "descricao": "\"Triste Fim de Policarpo Quaresma\", escrito por Lima Barreto, é um romance que retrata a trajetória trágica de Policarpo Quaresma, um funcionário público idealista e nacionalista fervoroso que sonha em transformar o Brasil em uma nação próspera e moderna. Policarpo é um homem de princípios sólidos e uma fé inabalável na capacidade do país para se reformar, mas sua visão utópica e suas ações excêntricas acabam por afastá-lo da realidade e das pessoas ao seu redor. Seu fervor pela pátria e suas ideias radicalmente nacionalistas o levam a um conflito constante com a sociedade e o governo, culminando em um final melancólico e irônico que reflete a crítica social e a denúncia das injustiças e do atraso que marcavam o Brasil da época."
 	}
   ]
   
